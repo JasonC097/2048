@@ -15,32 +15,81 @@
  * **************************************** */
 package org.MMMJ;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Movement {
+    /**
+     * Scanner object
+     */
+    private Scanner scnr;
+    /**
+     * list of all tiles on the board
+     */
+    private ArrayList<Tile> listOfTiles;
+
 
     /**
-     * Moving up
+     * Constructor for the movement class
      */
-    boolean up;
-    /**
-     * Moving down
-     */
-    boolean down;
-    /**
-     * moving left
-     */
-    boolean left;
-    /**
-     * moving right
-     */
-    boolean right;
-
     public Movement() {
-
+        this.listOfTiles = new ArrayList<Tile>();
     }
 
-    public void move(){
-
+    public boolean checkCollision(Tile tile ,String key){
+        switch (key){
+            case "w":
+                if(Board.getValueAt(tile.getXPos(),tile.getYPos()-1) != 0){
+                    return true;
+                }
+            case "s":
+                if(Board.getValueAt(tile.getXPos(),tile.getYPos()+1) != 0){
+                    return true;
+                }
+            case "a":
+                if(Board.getValueAt(tile.getXPos()-1,tile.getYPos()) != 0){
+                    return true;
+                }
+            case "d":
+                if(Board.getValueAt(tile.getXPos()+1,tile.getYPos()) != 0){
+                    return true;
+                }
+            default:
+                return false;
+        }
     }
 
+    public void moveTile(){
+        scnr = new Scanner(System.in);
+        switch(scnr.next()){
+            case "w":
+                for(Tile tile : listOfTiles){
+                    if(!checkCollision(tile, "w")){
+                        tile.setYPos(tile.getYPos()-1);
+                    }
+                }
+                break;
+            case "s":
+                for(Tile tile : listOfTiles){
+                    if(!checkCollision(tile, "s")){
+                        tile.setYPos(tile.getYPos()+1);
+                    }
+                }
+                break;
+            case "a":
+                for(Tile tile : listOfTiles){
+                    if(!checkCollision(tile, "a")){
+                        tile.setXPos(tile.getXPos()-1);
+                    }
+                }
+                break;
+            case "d":
+                for(Tile tile : listOfTiles){
+                    if(!checkCollision(tile, "d")){
+                        tile.setXPos(tile.getXPos()+1);
+                    }
+                }
+        }
+    }
 
 }
