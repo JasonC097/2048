@@ -23,7 +23,7 @@ public class Tile {
     private Color currColor;
 
     public Tile(){
-        this.currNum = 2;
+        this.currNum = 0;
     }
 
     public Tile(int tileNumber){
@@ -46,7 +46,13 @@ public class Tile {
 
     @Override
     public String toString() {
-        return Integer.toString(currNum);
+        if(this.currNum == 0){
+            return " ";
+        }else{
+            return Integer.toString(currNum);
+        }
+
+
     }
 
     /**
