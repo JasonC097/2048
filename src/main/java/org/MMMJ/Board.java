@@ -6,7 +6,7 @@
  *Name: Miguel Romero
  *Section: 01
  *Date: 4/11/24
- *Time: 3:48 PM
+ *Time: 3:48PM
  *
  *Project: csci205_final_project
  *Package: org.MMMJ
@@ -15,11 +15,23 @@
  * **************************************** */
 package org.MMMJ;
 
+class OutOfBoardException extends Exception{
+    public OutOfBoardException(String msg){
+        super(msg);
+    }
+}
+
+class TileOccupiedException extends  Exception{
+    public TileOccupiedException(String msg){
+        super(msg);
+    }
+}
+
 public class Board {
 
-    Tile[][] board;
+    private Tile[][] board;
 
-    int size;
+    private int size;
 
     public Board(int boardSize){
         this.size = boardSize;
@@ -46,15 +58,32 @@ public class Board {
 
     }
 
-    public void addTile(int row, int col, Tile tile){
+
+
+    public int getSize(){return this.size;}
+
+    public Tile getTile(int row, int col){return this.board[row][col];}
+
+    public void addTile(int row, int col, Tile tile) throws OutOfBoardException, TileOccupiedException {
+        testTile(row, col);
         this.board[row][col] = tile;
+
+    }
+
+    public void testTile(int row, int col) throws OutOfBoardException, TileOccupiedException {
+        if (row >= size || col >= size){
+            throw new OutOfBoardException("ROW OR COL OUT OF BOARD");
+        }else if(this.board[row][col].getCurrNum() != 0 ){
+            throw new TileOccupiedException("OCCUPIED TILE");
+        }
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
         Board test = new Board(5);
         Tile tile = new Tile(4);
         test.addTile(3,3,tile);
+        System.out.println(test.getTile(3,3));
         test.printBoard();
     }
 
