@@ -67,5 +67,9 @@ public class Tile {
         return currNum;
     }
 
+    public void setCurrNum(int newNum){
+        this.currNum = newNum;
+    }
+
 
 }

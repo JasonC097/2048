@@ -72,10 +72,12 @@ public class GenerateSquares {
     public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
         Board board = new Board(5);
         GenerateSquares generateSquares = new GenerateSquares(board);
-        board.addTile(0,0,generateSquares.generateNewTile());
-        board.addTile(0,1,generateSquares.generateNewTile());
+        board.addTile(0,0,new Tile(4));
+        board.addTile(0,1,new Tile(4));
         board.addTile(1,0,generateSquares.generateNewTile());
         board.addTile(0,4,generateSquares.generateNewTile());
+        Combining combining = new Combining(board.getTile(0,0), board.getTile(0,1));
+
 
         board.printBoard();
 
