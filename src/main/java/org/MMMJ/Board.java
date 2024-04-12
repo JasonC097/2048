@@ -62,6 +62,11 @@ public class Board {
     }
 
 
+    public Tile[][] getBoard(){
+        return this.board;
+    }
+
+
 
 
 
