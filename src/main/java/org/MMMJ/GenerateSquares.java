@@ -76,7 +76,7 @@ public class GenerateSquares {
         board.addTile(0,1,new Tile(4));
         board.addTile(1,0,generateSquares.generateNewTile());
         board.addTile(0,4,generateSquares.generateNewTile());
-        Combining combining = new Combining(board.getTile(0,0), board.getTile(0,1));
+        Combining combining = new Combining(board.getValueAt(0,0), board.getValueAt(0,1));
 
 
         board.printBoard();

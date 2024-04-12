@@ -22,6 +22,10 @@ public class Tile {
 
     private Color currColor;
 
+    private int xPos;
+
+    private int yPos;
+
     public Tile(){
         this.currNum = 0;
     }
@@ -49,6 +53,8 @@ public class Tile {
 
 
 
+
+
     @Override
     public String toString() {
         if(this.currNum == 0){
@@ -70,6 +76,23 @@ public class Tile {
     public void setCurrNum(int newNum){
         this.currNum = newNum;
     }
+
+    public int getXPos(){return this.xPos;}
+
+
+    public int getYPos(){return this.xPos;}
+
+
+    public void setXPos(int xPos){
+        this.xPos = xPos;
+    }
+
+    public void setYPos(int yPos){
+        this.yPos = yPos;
+    }
+
+
+
 
 
 }

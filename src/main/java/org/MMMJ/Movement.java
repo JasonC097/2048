@@ -24,9 +24,11 @@ public class Movement {
      */
     private Scanner scnr;
     /**
-     * list of all tiles on the board
+     * list of all tiles on the theBoard
      */
     private ArrayList<Tile> listOfTiles;
+    
+    private Board theBoard;
 
 
     /**
@@ -34,24 +36,25 @@ public class Movement {
      */
     public Movement() {
         this.listOfTiles = new ArrayList<Tile>();
+        this.theBoard = new Board(5);
     }
 
     public boolean checkCollision(Tile tile ,String key){
         switch (key){
             case "w":
-                if(Board.getValueAt(tile.getXPos(),tile.getYPos()-1) != 0){
+                if(theBoard.getValueAt(tile.getXPos(),tile.getYPos()-1).getCurrNum() != 0){
                     return true;
                 }
             case "s":
-                if(Board.getValueAt(tile.getXPos(),tile.getYPos()+1) != 0){
+                if(theBoard.getValueAt(tile.getXPos(),tile.getYPos()+1).getCurrNum() != 0){
                     return true;
                 }
             case "a":
-                if(Board.getValueAt(tile.getXPos()-1,tile.getYPos()) != 0){
+                if(theBoard.getValueAt(tile.getXPos()-1,tile.getYPos()).getCurrNum() != 0){
                     return true;
                 }
             case "d":
-                if(Board.getValueAt(tile.getXPos()+1,tile.getYPos()) != 0){
+                if(theBoard.getValueAt(tile.getXPos()+1,tile.getYPos()).getCurrNum() != 0){
                     return true;
                 }
             default:

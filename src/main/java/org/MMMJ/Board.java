@@ -43,7 +43,10 @@ public class Board {
     public void initBoard(){
         for (int i = 0; i < size ; i++) {
             for (int j = 0; j < size ; j++) {
-                board[i][j] = new Tile();
+                Tile tile1 = new Tile();
+                board[i][j] = tile1;
+                tile1.setXPos(i);
+                tile1.setYPos(j);
             }
         }
     }
@@ -60,9 +63,11 @@ public class Board {
 
 
 
+
+
     public int getSize(){return this.size;}
 
-    public Tile getTile(int row, int col){return this.board[row][col];}
+    public Tile getValueAt(int row, int col){return this.board[row][col];}
 
     public void addTile(int row, int col, Tile tile) throws OutOfBoardException, TileOccupiedException {
         testTile(row, col);
@@ -83,7 +88,7 @@ public class Board {
         Board test = new Board(5);
         Tile tile = new Tile(4);
         test.addTile(3,3,tile);
-        System.out.println(test.getTile(3,3));
+        System.out.println(test.getValueAt(3,3));
         test.printBoard();
     }
 
