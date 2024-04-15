@@ -97,9 +97,6 @@ public class Board {
         System.out.println(test.getValueAt(3,3));
         test.printBoard();
 
-        while(true){
-            test.addTile();
-        }
     }
 
 }
