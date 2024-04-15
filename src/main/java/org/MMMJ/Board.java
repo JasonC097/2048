@@ -15,6 +15,8 @@
  * **************************************** */
 package org.MMMJ;
 
+import java.util.Random;
+
 class OutOfBoardException extends Exception{
     public OutOfBoardException(String msg){
         super(msg);
@@ -39,6 +41,10 @@ public class Board {
         initBoard();
     }
 
+    public Tile[][] getBoard(){
+        return this.board;
+    }
+
 
     public void initBoard(){
         for (int i = 0; i < size ; i++) {
@@ -58,7 +64,6 @@ public class Board {
             }
             System.out.println();
         }
-
     }
 
 
@@ -75,6 +80,7 @@ public class Board {
 
     }
 
+
     public void testTile(int row, int col) throws OutOfBoardException, TileOccupiedException {
         if (row >= size || col >= size){
             throw new OutOfBoardException("ROW OR COL OUT OF BOARD");
@@ -90,6 +96,10 @@ public class Board {
         test.addTile(3,3,tile);
         System.out.println(test.getValueAt(3,3));
         test.printBoard();
+
+        while(true){
+            test.addTile();
+        }
     }
 
 }

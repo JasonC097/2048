@@ -23,10 +23,6 @@ public class Movement {
      * Scanner object
      */
     private Scanner scnr;
-    /**
-     * list of all tiles on the theBoard
-     */
-    private ArrayList<Tile> listOfTiles;
     
     private Board theBoard;
 
@@ -35,7 +31,6 @@ public class Movement {
      * Constructor for the movement class
      */
     public Movement() {
-        this.listOfTiles = new ArrayList<Tile>();
         this.theBoard = new Board(5);
     }
 
@@ -66,30 +61,38 @@ public class Movement {
         scnr = new Scanner(System.in);
         switch(scnr.next()){
             case "w":
-                for(Tile tile : listOfTiles){
-                    if(!checkCollision(tile, "w")){
-                        tile.setYPos(tile.getYPos()-1);
+                for(Tile[] row : theBoard.getBoard()){
+                    for(Tile tile : row) {
+                        while (!checkCollision(tile, "w")) {
+                            tile.setYPos(tile.getYPos() - 1);
+                        }
                     }
                 }
                 break;
             case "s":
-                for(Tile tile : listOfTiles){
-                    if(!checkCollision(tile, "s")){
-                        tile.setYPos(tile.getYPos()+1);
+                for(Tile[] row : theBoard.getBoard()) {
+                    for (Tile tile : row) {
+                        while (!checkCollision(tile, "s")) {
+                            tile.setYPos(tile.getYPos() + 1);
+                        }
                     }
                 }
                 break;
             case "a":
-                for(Tile tile : listOfTiles){
-                    if(!checkCollision(tile, "a")){
-                        tile.setXPos(tile.getXPos()-1);
+                for(Tile[] row : theBoard.getBoard()) {
+                    for (Tile tile : row) {
+                        while (!checkCollision(tile, "a")) {
+                            tile.setYPos(tile.getYPos() - 1);
+                        }
                     }
                 }
                 break;
             case "d":
-                for(Tile tile : listOfTiles){
-                    if(!checkCollision(tile, "d")){
-                        tile.setXPos(tile.getXPos()+1);
+                for(Tile[] row : theBoard.getBoard()) {
+                    for (Tile tile : row) {
+                        while (!checkCollision(tile, "d")) {
+                            tile.setYPos(tile.getYPos() + 1);
+                        }
                     }
                 }
         }
