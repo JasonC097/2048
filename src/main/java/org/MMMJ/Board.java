@@ -15,8 +15,6 @@
  * **************************************** */
 package org.MMMJ;
 
-import java.util.Random;
-
 class OutOfBoardException extends Exception{
     public OutOfBoardException(String msg){
         super(msg);
@@ -30,9 +28,13 @@ class TileOccupiedException extends  Exception{
 }
 
 public class Board {
-
+    /**
+     * 2d representation of the board
+     */
     private Tile[][] board;
-
+    /**
+     *  the size the sides of the square board
+     */
     private int size;
 
     public Board(int boardSize){
@@ -41,11 +43,16 @@ public class Board {
         initBoard();
     }
 
+    /**
+     * @return gets the 2D representation of the board
+     */
     public Tile[][] getBoard(){
         return this.board;
     }
 
-
+    /**
+     * Initialized the board with tiles of a current number 0 as well as setting each tiles metadata
+     */
     public void initBoard(){
         for (int i = 0; i < size ; i++) {
             for (int j = 0; j < size ; j++) {
@@ -62,7 +69,7 @@ public class Board {
             for (int j = 0; j < size ; j++) {
                 System.out.print("|" + board[i][j]);
             }
-            System.out.println();
+            System.out.println("|");
         }
     }
 
@@ -72,8 +79,17 @@ public class Board {
 
     public int getSize(){return this.size;}
 
-    public Tile getValueAt(int row, int col){return this.board[row][col];}
+    public Tile getTileAt(int row, int col){return this.board[row][col];}
 
+    /**
+     * Adds a tile to the board in an unoccupied position
+     *
+     * @param row the row of the new tile
+     * @param col the col of the new tile
+     * @param tile the new tile
+     * @throws OutOfBoardException if (row,col) pair is outside the board
+     * @throws TileOccupiedException if (row,col) pair is replacing a part that already has a valid tile
+     */
     public void addTile(int row, int col, Tile tile) throws OutOfBoardException, TileOccupiedException {
         testTile(row, col);
         this.board[row][col] = tile;
@@ -81,6 +97,14 @@ public class Board {
         tile.setYPos(col);
     }
 
+    /**
+     *  replaces a tile of the of an occupied position
+     *
+     * @param row the row of the new tile
+     * @param col the col of the new tile
+     * @param tile the new tile
+     * @throws OutOfBoardException if (row,col) pair is outside the board
+     */
     public void replaceTile(int row, int col, Tile tile) throws OutOfBoardException {
         if (row >= size || row < 0 || col < 0 || col >= size){
             throw new OutOfBoardException("ROW OR COL OUT OF BOARD " + row + ", " + col);
@@ -90,7 +114,13 @@ public class Board {
         tile.setYPos(col);
     }
 
-
+    /**
+     * test whether (row,col) pair is inside the board and if it's occupied tile
+     * @param row the row of the tile
+     * @param col the col of the tile
+     * @throws OutOfBoardException
+     * @throws TileOccupiedException
+     */
     public void testTile(int row, int col) throws OutOfBoardException, TileOccupiedException {
         if (row >= size || row < 0 || col < 0 || col >= size){
             throw new OutOfBoardException("ROW OR COL OUT OF BOARD " + row + ", " + col);
@@ -102,10 +132,10 @@ public class Board {
 
     public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
         Board test = new Board(5);
-        Tile tile = new Tile(4);
+        Tile tile = new Tile(16);
         test.addTile(3,3,tile);
-        System.out.println(test.getValueAt(3,3).getXPos());
-        System.out.println(test.getValueAt(3,3).getYPos());
+        System.out.println(test.getTileAt(3,3).getXPos());
+        System.out.println(test.getTileAt(3,3).getYPos());
 
 
 //        System.out.println(test.getValueAt(3,3));

@@ -58,12 +58,10 @@ public class Tile {
     @Override
     public String toString() {
         if(this.currNum == 0){
-            return " ";
+            return "    ";
         }else{
-            return Integer.toString(currNum);
+            return  String.format("%4d",currNum);
         }
-
-
     }
 
     /**

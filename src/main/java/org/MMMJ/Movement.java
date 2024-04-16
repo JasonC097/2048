@@ -15,7 +15,6 @@
  * **************************************** */
 package org.MMMJ;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Movement {
@@ -26,7 +25,12 @@ public class Movement {
     
     private Board theBoard;
 
-    public Movement(Board board){this.theBoard= board;}
+    private Combining combining;
+
+    public Movement(Board board){
+        this.theBoard= board;
+        this.combining = new Combining(theBoard);
+    }
 
 
     /**
@@ -37,43 +41,42 @@ public class Movement {
     }
 
 
-    public boolean checkCollision(Tile tile ,String key){
+    public boolean checkCollision(Tile tile ,String key) throws TileOccupiedException, OutOfBoardException {
         switch (key){
             case "w":
-                if (tile.getCurrNum() != 0) {
-                    if (tile.getXPos() - 1 >= 0) {
-                        if(theBoard.getValueAt(tile.getXPos() - 1,tile.getYPos()).getCurrNum() == 0){
-                            return true;
-                        }
-
-                    }
+                if (tile.getXPos() - 1 >= 0  &&  theBoard.getTileAt(tile.getXPos() - 1,tile.getYPos()).getCurrNum() == 0) {
+                    return true;
+                }else if(tile.getXPos() - 1 >= 0){
+                    combining.setBlock1(theBoard.getTileAt(tile.getXPos(), tile.getYPos()));
+                    combining.setBlock2(theBoard.getTileAt(tile.getXPos() - 1, tile.getYPos()));
+                    combining.combine();
                 }
                 break;
             case "s":
-                if (tile.getCurrNum() != 0) {
-                    if (tile.getXPos() + 1 < theBoard.getSize()) {
-                        if (theBoard.getValueAt(tile.getXPos() + 1, tile.getYPos()).getCurrNum() == 0) {
-                            return true;
-                        }
-                    }
+                if (tile.getXPos() + 1 < theBoard.getSize() && theBoard.getTileAt(tile.getXPos() + 1, tile.getYPos()).getCurrNum() == 0) {
+                    return true;
+                }else if (tile.getXPos() + 1 < theBoard.getSize()){
+                    combining.setBlock1(theBoard.getTileAt(tile.getXPos(),tile.getYPos()));
+                    combining.setBlock2(theBoard.getTileAt(tile.getXPos() + 1, tile.getYPos()));
+                    combining.combine();
                 }
                 break;
             case "a":
-                if (tile.getCurrNum() != 0) {
-                    if (tile.getYPos() - 1 >= 0) {
-                        if (theBoard.getValueAt(tile.getXPos() , tile.getYPos() - 1).getCurrNum() == 0) {
-                            return true;
-                        }
-                    }
+                if (tile.getYPos() - 1 >= 0 && theBoard.getTileAt(tile.getXPos() , tile.getYPos() - 1).getCurrNum() == 0 ) {
+                    return true;
+                }else if (tile.getYPos() - 1 >= 0 ){
+                    combining.setBlock1(theBoard.getTileAt(tile.getXPos(), tile.getYPos()));
+                    combining.setBlock2(theBoard.getTileAt(tile.getXPos(), tile.getYPos() - 1));
+                    combining.combine();
                 }
                 break;
             case "d":
-                if (tile.getCurrNum() != 0) {
-                    if (tile.getYPos() + 1 < theBoard.getSize()) {
-                        if (theBoard.getValueAt(tile.getXPos() , tile.getYPos() + 1).getCurrNum() == 0) {
-                            return true;
-                        }
-                    }
+                if (tile.getYPos() + 1 < theBoard.getSize() && theBoard.getTileAt(tile.getXPos() , tile.getYPos() + 1).getCurrNum() == 0 ) {
+                    return true;
+                } else if (tile.getYPos()  + 1 < theBoard.getSize()){
+                    combining.setBlock1(theBoard.getTileAt(tile.getXPos(),tile.getYPos()));
+                    combining.setBlock2(theBoard.getTileAt(tile.getXPos(), tile.getYPos() + 1));
+                    combining.combine();
                 }
                 break;
             default:
@@ -103,7 +106,7 @@ public class Movement {
             case "s":
                 for(int i = theBoard.getSize() -1;  i >= 0; i--) {
                     for (int j = theBoard.getSize() -1; j >= 0; j--) {
-                        Tile tile = theBoard.getValueAt(i,j);
+                        Tile tile = theBoard.getTileAt(i,j);
                         if(tile.getCurrNum() != 0) {
                             while (checkCollision(tile, "s")) {
                                 int oldYPos = tile.getYPos();
@@ -132,7 +135,7 @@ public class Movement {
             case "d":
                 for(int i = theBoard.getSize() -1;  i >= 0; i--) {
                     for (int j = theBoard.getSize() -1; j >= 0; j--) {
-                        Tile tile = theBoard.getValueAt(i,j);
+                        Tile tile = theBoard.getTileAt(i,j);
                         if(tile.getCurrNum() != 0) {
                             while (checkCollision(tile, "d")) {
                                 int oldYPos = tile.getYPos();
@@ -152,15 +155,21 @@ public class Movement {
     public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
         Scanner scnr = new Scanner(System.in);
         Board testBoard = new Board(4);
-        testBoard.addTile(2,1, new Tile(4));
-        testBoard.addTile(2,2,new Tile(8));
-        testBoard.addTile(1,1, new Tile(9));
+        testBoard.addTile(2,2,new Tile(4));
+        testBoard.addTile(2,1,new Tile(2));
+        testBoard.addTile(1,2,new Tile(4));
+        testBoard.addTile(1,1,new Tile(2));
 //        testBoard.printBoard();
         Movement movement = new Movement(testBoard);
+        GenerateSquares generateSquares = new GenerateSquares(movement.theBoard);
         movement.theBoard.printBoard();
-        for (int i = 0; i <10 ; i++) {
+        for (int i = 0; i < 100 ; i++) {
             movement.moveTile(scnr);
             movement.theBoard.printBoard();
+            generateSquares.generateNewTile();
+            int[] emptyPos = generateSquares.findEmptyPosition();
+            movement.theBoard.addTile(emptyPos[0],emptyPos[1], generateSquares.generateNewTile());
+
         }
 
 
