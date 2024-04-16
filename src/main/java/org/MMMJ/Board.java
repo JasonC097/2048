@@ -77,15 +77,25 @@ public class Board {
     public void addTile(int row, int col, Tile tile) throws OutOfBoardException, TileOccupiedException {
         testTile(row, col);
         this.board[row][col] = tile;
+        tile.setXPos(row);
+        tile.setYPos(col);
+    }
 
+    public void replaceTile(int row, int col, Tile tile) throws OutOfBoardException {
+        if (row >= size || row < 0 || col < 0 || col >= size){
+            throw new OutOfBoardException("ROW OR COL OUT OF BOARD " + row + ", " + col);
+        }
+        this.board[row][col] = tile;
+        tile.setXPos(row);
+        tile.setYPos(col);
     }
 
 
     public void testTile(int row, int col) throws OutOfBoardException, TileOccupiedException {
-        if (row >= size || col >= size){
-            throw new OutOfBoardException("ROW OR COL OUT OF BOARD");
+        if (row >= size || row < 0 || col < 0 || col >= size){
+            throw new OutOfBoardException("ROW OR COL OUT OF BOARD " + row + ", " + col);
         }else if(this.board[row][col].getCurrNum() != 0 ){
-            throw new TileOccupiedException("OCCUPIED TILE");
+            throw new TileOccupiedException("OCCUPIED TILE " + row +","+ col);
         }
     }
 
@@ -94,8 +104,13 @@ public class Board {
         Board test = new Board(5);
         Tile tile = new Tile(4);
         test.addTile(3,3,tile);
-        System.out.println(test.getValueAt(3,3));
+        System.out.println(test.getValueAt(3,3).getXPos());
+        System.out.println(test.getValueAt(3,3).getYPos());
+
+
+//        System.out.println(test.getValueAt(3,3));
         test.printBoard();
+
 
     }
 

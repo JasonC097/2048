@@ -80,7 +80,7 @@ public class Tile {
     public int getXPos(){return this.xPos;}
 
 
-    public int getYPos(){return this.xPos;}
+    public int getYPos(){return this.yPos;}
 
 
     public void setXPos(int xPos){

@@ -24,8 +24,6 @@ public class GenerateSquares {
     public GenerateSquares(Board board){
         this.random = new Random();
         this.board = board;
-
-
     }
 
     /**
