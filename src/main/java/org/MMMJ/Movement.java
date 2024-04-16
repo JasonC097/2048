@@ -19,10 +19,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Movement {
-    /**
-     * Scanner object
-     */
-    private Scanner scnr;
+
     
     private Board theBoard;
 
@@ -57,11 +54,10 @@ public class Movement {
         }
     }
 
-    public void moveTile(){
-        scnr = new Scanner(System.in);
-        switch(scnr.next()){
+    public void moveTile(String move, Board board){
+        switch(move){
             case "w":
-                for(Tile[] row : theBoard.getBoard()){
+                for(Tile[] row : board.getBoard()){
                     for(Tile tile : row) {
                         while (!checkCollision(tile, "w")) {
                             tile.setYPos(tile.getYPos() - 1);
@@ -70,7 +66,7 @@ public class Movement {
                 }
                 break;
             case "s":
-                for(Tile[] row : theBoard.getBoard()) {
+                for(Tile[] row : board.getBoard()) {
                     for (Tile tile : row) {
                         while (!checkCollision(tile, "s")) {
                             tile.setYPos(tile.getYPos() + 1);
@@ -79,7 +75,7 @@ public class Movement {
                 }
                 break;
             case "a":
-                for(Tile[] row : theBoard.getBoard()) {
+                for(Tile[] row : board.getBoard()) {
                     for (Tile tile : row) {
                         while (!checkCollision(tile, "a")) {
                             tile.setYPos(tile.getYPos() - 1);
@@ -88,7 +84,7 @@ public class Movement {
                 }
                 break;
             case "d":
-                for(Tile[] row : theBoard.getBoard()) {
+                for(Tile[] row : board.getBoard()) {
                     for (Tile tile : row) {
                         while (!checkCollision(tile, "d")) {
                             tile.setYPos(tile.getYPos() + 1);

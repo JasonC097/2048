@@ -25,6 +25,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import org.MMMJ.Board;
+import org.MMMJ.Movement;
+import org.MMMJ.Tile;
 
 public class FXMLController {
 
@@ -44,6 +46,8 @@ public class FXMLController {
 
     @FXML
     private GridPane tileGrid;
+
+    private Movement move = new Movement();
 
     @FXML
     void initialize() {
@@ -65,6 +69,27 @@ public class FXMLController {
         btnNewGame.setOnAction(actionEvent -> {
             this.theBoard.initBoard();
         });
+
+        //when WASD are pressed move the tile
+        tileGrid.setOnKeyPressed(keyEvent -> {
+            switch (keyEvent.getCode()) {
+                case W:
+                    move.moveTile("w", theBoard);
+                    break;
+                case S:
+                    move.moveTile("s", theBoard);
+                    break;
+                case A:
+                    move.moveTile("a", theBoard);
+                    break;
+                case D:
+                    move.moveTile("d", theBoard);
+                    break;
+                default:
+                    break;
+            }
+        });
+
     }
 
 }
