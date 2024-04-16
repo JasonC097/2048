@@ -70,6 +70,7 @@ public class Board {
 
 
 
+
     public int getSize(){return this.size;}
 
     public Tile getValueAt(int row, int col){return this.board[row][col];}
