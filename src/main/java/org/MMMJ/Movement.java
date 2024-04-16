@@ -42,9 +42,7 @@ public class Movement {
             case "w":
                 if (tile.getCurrNum() != 0) {
                     if (tile.getXPos() - 1 >= 0) {
-                        System.out.println("In The board");
                         if(theBoard.getValueAt(tile.getXPos() - 1,tile.getYPos()).getCurrNum() == 0){
-                            System.out.println("Up location is clear ");
                             return true;
                         }
 
@@ -54,9 +52,7 @@ public class Movement {
             case "s":
                 if (tile.getCurrNum() != 0) {
                     if (tile.getXPos() + 1 < theBoard.getSize()) {
-                        System.out.println("In The board");
                         if (theBoard.getValueAt(tile.getXPos() + 1, tile.getYPos()).getCurrNum() == 0) {
-                            System.out.println("down location is clear ");
                             return true;
                         }
                     }
@@ -65,9 +61,7 @@ public class Movement {
             case "a":
                 if (tile.getCurrNum() != 0) {
                     if (tile.getYPos() - 1 >= 0) {
-                        System.out.println("In The board");
                         if (theBoard.getValueAt(tile.getXPos() , tile.getYPos() - 1).getCurrNum() == 0) {
-                            System.out.println("left location is clear ");
                             return true;
                         }
                     }
@@ -76,9 +70,7 @@ public class Movement {
             case "d":
                 if (tile.getCurrNum() != 0) {
                     if (tile.getYPos() + 1 < theBoard.getSize()) {
-                        System.out.println("In The board");
                         if (theBoard.getValueAt(tile.getXPos() , tile.getYPos() + 1).getCurrNum() == 0) {
-                            System.out.println("left location is clear ");
                             return true;
                         }
                     }
@@ -90,8 +82,8 @@ public class Movement {
         return false;
     }
 
-    public void moveTile() throws TileOccupiedException, OutOfBoardException {
-        scnr = new Scanner(System.in);
+    public void moveTile(Scanner scnr) throws TileOccupiedException, OutOfBoardException {
+//        scnr = new Scanner(System.in);
         System.out.println("Enter direction you want to head in:");
         switch(scnr.next()){
             case "w":
@@ -158,7 +150,8 @@ public class Movement {
     public Board getTheBoard(){return theBoard;}
 
     public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
-        Board testBoard = new Board(5);
+        Scanner scnr = new Scanner(System.in);
+        Board testBoard = new Board(4);
         testBoard.addTile(2,1, new Tile(4));
         testBoard.addTile(2,2,new Tile(8));
         testBoard.addTile(1,1, new Tile(9));
@@ -166,7 +159,7 @@ public class Movement {
         Movement movement = new Movement(testBoard);
         movement.theBoard.printBoard();
         for (int i = 0; i <10 ; i++) {
-            movement.moveTile();
+            movement.moveTile(scnr);
             movement.theBoard.printBoard();
         }
 
