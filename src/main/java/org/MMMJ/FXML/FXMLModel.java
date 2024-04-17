@@ -26,12 +26,6 @@ public class FXMLModel {
     private Board theBoard;
 
 
-    public void addNewTile() throws TileOccupiedException, OutOfBoardException {
-        GenerateSquares newTile = new GenerateSquares(theBoard);
-        int r1 = new Random().nextInt(0,4);
-        int r2 = new Random().nextInt(0,4);
-        theBoard.addTile(r1,r2, newTile.generateNewTile());
-    }
 
 
 }

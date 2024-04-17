@@ -17,13 +17,13 @@ package org.MMMJ;
 
 import java.util.Random;
 
-public class OutOfBoardException extends Exception{
+class OutOfBoardException extends Exception{
     public OutOfBoardException(String msg){
         super(msg);
     }
 }
 
-public class TileOccupiedException extends  Exception{
+class TileOccupiedException extends  Exception{
     public TileOccupiedException(String msg){
         super(msg);
     }

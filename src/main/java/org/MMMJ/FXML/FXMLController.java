@@ -55,13 +55,15 @@ public class FXMLController {
         assert labelScore != null : "fx:id=\"labelScore\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         initBinidings();
+        initEventHandlers();
     }
 
     /**
      * set up bindings for 2048
      */
     public void initBinidings(){
-
+        System.out.println(tileGrid.getChildren());
+        System.out.println(tileGrid.getChildren().get(0));
     }
 
     public void initEventHandlers(){
