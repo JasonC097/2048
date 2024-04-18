@@ -6,6 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javafx.scene.Node;
+import javafx.scene.Parent;
+
+
 import java.io.IOException;
 
 public class FXMLMain extends Application {
@@ -13,6 +17,7 @@ public class FXMLMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {

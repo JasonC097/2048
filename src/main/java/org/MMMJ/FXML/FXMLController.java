@@ -18,19 +18,27 @@
  */
 package org.MMMJ.FXML;
 
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import org.MMMJ.Board;
 import org.MMMJ.Movement;
 import org.MMMJ.Tile;
 
+
 public class FXMLController {
 
-    private Board theBoard;
+    private Board theBoard = new Board(4);
 
     @FXML
     private ResourceBundle resources;
@@ -47,51 +55,45 @@ public class FXMLController {
     @FXML
     private GridPane tileGrid;
 
-    private Movement move = new Movement();
+    private Tile[][] array = theBoard.getBoard();
+
 
     @FXML
     void initialize() {
         assert btnNewGame != null : "fx:id=\"btnNewGame\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert labelScore != null : "fx:id=\"labelScore\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
+
+        System.out.println(array[0][0].getCurrNum());
+        array[0][0].setCurrNum(4);
         initBinidings();
+        System.out.println("here");
         initEventHandlers();
+    }
+    /**
+     * set up bindings for the game
+     */
+    public void initBinidings(){
+        for (int row = 0; row < array.length; row++) {
+            for (int col = 0; col < array[row].length; col++) {
+                Label label = (Label) tileGrid.lookup("#label" + row + col);
+                ObjectProperty<String> valueProperty = new SimpleObjectProperty<>(Integer.toString(array[row][col].getCurrNum()));
+                label.textProperty().bindBidirectional(valueProperty);
+            }
+        }
     }
 
     /**
-     * set up bindings for 2048
+     * Set up event handlers
      */
-    public void initBinidings(){
-        System.out.println(tileGrid.getChildren());
-        System.out.println(tileGrid.getChildren().get(0));
-    }
-
     public void initEventHandlers(){
-        //btnNewGame needs to reset the game
-        btnNewGame.setOnAction(actionEvent -> {
-            this.theBoard.initBoard();
+        System.out.println("event");
+        tileGrid.setOnKeyPressed(event -> {
+            System.out.println("Key pressed: " + event.getCode());
+            for (Node node : tileGrid.getChildren()) {
+                ((Label) node).setText("New Value");
+                }
         });
-
-        //when WASD are pressed move the tile
-        tileGrid.setOnKeyPressed(keyEvent -> {
-            switch (keyEvent.getCode()) {
-                case W:
-                    move.moveTile("w", theBoard);
-                    break;
-                case S:
-                    move.moveTile("s", theBoard);
-                    break;
-                case A:
-                    move.moveTile("a", theBoard);
-                    break;
-                case D:
-                    move.moveTile("d", theBoard);
-                    break;
-                default:
-                    break;
-            }
-        });
-
     }
 
 }
