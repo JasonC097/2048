@@ -150,26 +150,30 @@ public class Movement {
         }
     }
 
+    public Combining getCombining() {
+        // Probably won't be needed when combine is refactored into movement
+        // Temp for GameManager implementation
+        return combining;
+    }
+
     public Board getTheBoard(){return theBoard;}
 
     public static void main(String[] args) throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
-        Scanner scnr = new Scanner(System.in);
+        Scanner scnr = new Scanner(System.in); // Scanner used for testing with key inputs
         Board testBoard = new Board(4);
         testBoard.addTile(2,2,new Tile(4));
         testBoard.addTile(2,1,new Tile(2));
         testBoard.addTile(1,2,new Tile(4));
         testBoard.addTile(1,1,new Tile(2));
-//        testBoard.printBoard();
         Movement movement = new Movement(testBoard);
         GenerateTiles generateTiles = new GenerateTiles(movement.theBoard);
         movement.theBoard.printBoard();
         for (int i = 0; i < 100 ; i++) {
             movement.moveTile(scnr);
-            movement.theBoard.printBoard();
             generateTiles.generateNewTile();
             int[] emptyPos = generateTiles.findEmptyPosition();
             movement.theBoard.addTile(emptyPos[0],emptyPos[1], generateTiles.generateNewTile());
-
+            movement.theBoard.printBoard();
         }
 
 
