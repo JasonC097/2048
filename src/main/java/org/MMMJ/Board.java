@@ -100,4 +100,41 @@ public class Board {
 
     }
 
+    public boolean checkCollision(Tile tile ,String key){
+        switch (key){
+            case "w":
+                if(board[tile.getXPos()][tile.getYPos()-1].getCurrNum() != 0){
+                    return true;
+                }
+            case "s":
+                if(board[tile.getXPos()][tile.getYPos()+1].getCurrNum() != 0){
+                    return true;
+                }
+            case "a":
+                if(board[tile.getXPos()-1][tile.getYPos()].getCurrNum() != 0){
+                    return true;
+                }
+            case "d":
+                if(board[tile.getXPos()+1][tile.getYPos()].getCurrNum() != 0){
+                    return true;
+                }
+            default:
+                return false;
+        }
+    }
+
+    public void moveTile(String move, Tile[][] array){
+        switch(move){
+            case "s":
+                for (int row = 0; row < array.length; row++) {
+                    for (int col = 0; col < array[row].length; col++) {
+                            array[row+1][col] = array[row][col];
+                    }
+                }
+            default:
+                break;
+        }
+    }
+
+
 }

@@ -88,8 +88,8 @@ public class FXMLController {
      */
     public void initEventHandlers(){
         System.out.println("event");
-        tileGrid.setOnKeyPressed(event -> {
-            System.out.println("Key pressed: " + event.getCode());
+        tileGrid.setOnKeyPressed(KeyEvent -> {
+            System.out.println("Key pressed: " + KeyEvent.getCode());
             for (Node node : tileGrid.getChildren()) {
                 ((Label) node).setText("New Value");
                 }
