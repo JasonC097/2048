@@ -152,7 +152,7 @@ public class Movement {
 
     public Board getTheBoard(){return theBoard;}
 
-    public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
+    public static void main(String[] args) throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         Scanner scnr = new Scanner(System.in);
         Board testBoard = new Board(4);
         testBoard.addTile(2,2,new Tile(4));
@@ -161,14 +161,14 @@ public class Movement {
         testBoard.addTile(1,1,new Tile(2));
 //        testBoard.printBoard();
         Movement movement = new Movement(testBoard);
-        GenerateSquares generateSquares = new GenerateSquares(movement.theBoard);
+        GenerateTiles generateTiles = new GenerateTiles(movement.theBoard);
         movement.theBoard.printBoard();
         for (int i = 0; i < 100 ; i++) {
             movement.moveTile(scnr);
             movement.theBoard.printBoard();
-            generateSquares.generateNewTile();
-            int[] emptyPos = generateSquares.findEmptyPosition();
-            movement.theBoard.addTile(emptyPos[0],emptyPos[1], generateSquares.generateNewTile());
+            generateTiles.generateNewTile();
+            int[] emptyPos = generateTiles.findEmptyPosition();
+            movement.theBoard.addTile(emptyPos[0],emptyPos[1], generateTiles.generateNewTile());
 
         }
 

@@ -17,11 +17,17 @@ package org.MMMJ;
 
 import java.util.Random;
 
-public class GenerateSquares {
+class BoardIsFullException extends Exception{
+    public BoardIsFullException(String msg){
+        super(msg);
+    }
+}
+
+public class GenerateTiles {
     private Random random;
 
     private Board board;
-    public GenerateSquares(Board board){
+    public GenerateTiles(Board board){
         this.random = new Random();
         this.board = board;
     }
@@ -45,42 +51,48 @@ public class GenerateSquares {
      *
      * @return a list [row, col] of the row,column pair
      */
-    public int[] findEmptyPosition(){
-        int testRow;
-        int testCol;
-        int[] emptyPos = new int[2];
-        while(true) {
-            testRow = random.nextInt(board.getSize());
-            testCol = random.nextInt(board.getSize());
-            try {
-                board.testTile(testRow, testCol);
-                break;
-            } catch (TileOccupiedException | OutOfBoardException e) {
+    public int[] findEmptyPosition() throws BoardIsFullException {
+        if(!board.isBoardFull()){
+            int testRow;
+            int testCol;
+            int[] emptyPos = new int[2];
+            while(true) {
+                testRow = random.nextInt(board.getSize());
+                testCol = random.nextInt(board.getSize());
+                try {
+                    board.testTile(testRow, testCol);
+                    break;
+                } catch (TileOccupiedException | OutOfBoardException e) {
+                }
             }
+
+
+            emptyPos[0] = testRow;
+            emptyPos[1] = testCol;
+
+            return emptyPos;
+
+        }else{
+            throw new BoardIsFullException("Board is full");
         }
 
-
-        emptyPos[0] = testRow;
-        emptyPos[1] = testCol;
-
-        return emptyPos;
     }
 
 
-    public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
-        Board board = new Board(5);
-        GenerateSquares generateSquares = new GenerateSquares(board);
+    public static void main(String[] args) throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
+        Board board = new Board(2);
+        GenerateTiles generateTiles = new GenerateTiles(board);
         board.addTile(0,0,new Tile(4));
         board.addTile(0,1,new Tile(4));
-        board.addTile(1,0,generateSquares.generateNewTile());
-        board.addTile(0,4,generateSquares.generateNewTile());
+        board.addTile(1,0,new Tile(2));
+//        board.addTile(1,1,new Tile(4));
         Combining combining = new Combining(board.getTileAt(0,0), board.getTileAt(0,1));
 
 
         board.printBoard();
 
 
-        int[] emptyPos = generateSquares.findEmptyPosition();
+        int[] emptyPos = generateTiles.findEmptyPosition();
 
         for (int pos: emptyPos){
             System.out.println(pos);

@@ -129,6 +129,17 @@ public class Board {
         }
     }
 
+    public boolean isBoardFull() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (board[i][j].getCurrNum() == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
         Board test = new Board(5);
