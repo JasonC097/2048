@@ -18,6 +18,9 @@
  */
 package org.MMMJ;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * @author Jason Chung
  * Class to handle win and lose conditions
@@ -86,20 +89,35 @@ public class GameManager {
     public boolean didPlayerLose() throws TileOccupiedException, OutOfBoardException {
         // Create copy of board and movement to not interfere with user's current board
         // Used for predicting possible movements
-        Board tempBoard = this.board;
+        Board tempBoard = makeCopyOfBoard();
         Movement tempMovement = new Movement(tempBoard);
-        // Try each possible movement; board will change when combination happens
+        // Try each possible movement; board will change when combination happens or tiles change positions
         tempMovement.moveTile("w");
         tempMovement.moveTile("s");
         tempMovement.moveTile("a");
         tempMovement.moveTile("d");
         // Check if board changed from any possible movement
-        if (tempMovement.getTheBoard() == this.board){
+        if (Arrays.deepEquals(tempMovement.getTheBoard().getBoard(), this.board.getBoard())){
             return true;
-        }
-        else {
+        } else {
             return false;
         }
+    }
+
+    /**
+     * Helper method to creating a separate board for seeing if possible moves can be made or not
+     * @return Board copy of the player's current board
+     * @throws OutOfBoardException - in case of placing a tile out of the board
+     */
+    private Board makeCopyOfBoard() throws OutOfBoardException {
+        Board tempBoard = new Board(this.board.getSize());
+        for (int row = 0; row < this.board.getSize(); row++){
+            for (int column = 0; column < this.board.getSize(); column++){
+                int tileValue = this.board.getTileAt(row, column).getCurrNum();
+                tempBoard.replaceTile(row, column, new Tile(tileValue));
+            }
+        }
+        return tempBoard;
     }
 
 }

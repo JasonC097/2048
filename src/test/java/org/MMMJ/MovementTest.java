@@ -53,10 +53,8 @@ class MovementTest {
         assertEquals(myMovement.getTheBoard().getTileAt(3,1).getCurrNum(), 8);
     }
 
-    private static Scanner getScanner(String direction) {
-        String userInput = direction + "\n";
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        return scanner;
+    @Test
+    void combine(){
+
     }
 }

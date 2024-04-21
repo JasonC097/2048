@@ -44,6 +44,21 @@ public class Board {
     }
 
     /**
+     * Helper constructor for creating a copy of whether the player lost
+     * @param boardCopy - the current board the player has
+     */
+    public Board(Board boardCopy){
+        this.board = boardCopy.getBoard();
+        this.size = boardCopy.getSize();
+    }
+
+    /**
+     * Setter method to help with cloning the board
+     * @param board the Tile[][] object to be wrapped as a board object
+     */
+    public void setBoard(Tile[][] board) { this.board = board;}
+
+    /**
      * @return gets the 2D representation of the board
      */
     public Tile[][] getBoard(){

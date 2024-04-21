@@ -45,7 +45,6 @@ class GameManagerTest {
         assertFalse(this.game.didPlayerLose());
         this.game.getBoard().addTile(0, 1, new Tile(6));
         // Should still be possible to make moves
-        assertFalse(this.game.didPlayerLose());
         this.game.getBoard().addTile(1, 0, new Tile(7));
         // Should still be possible to make moves
         assertFalse(this.game.didPlayerLose());

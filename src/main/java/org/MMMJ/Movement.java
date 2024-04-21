@@ -29,7 +29,6 @@ public class Movement {
 
     public Movement(Board board){
         this.theBoard= board;
-        this.combining = new Combining(theBoard);
     }
 
 
@@ -41,42 +40,38 @@ public class Movement {
     }
 
 
-    public boolean checkCollision(Tile tile ,String key) throws TileOccupiedException, OutOfBoardException {
+    public boolean checkCollision(Tile tile ,String key) throws OutOfBoardException {
         switch (key){
             case "w":
                 if (tile.getXPos() - 1 >= 0  &&  theBoard.getTileAt(tile.getXPos() - 1,tile.getYPos()).getCurrNum() == 0) {
                     return true;
                 }else if(tile.getXPos() - 1 >= 0){
-                    combining.setBlock1(theBoard.getTileAt(tile.getXPos(), tile.getYPos()));
-                    combining.setBlock2(theBoard.getTileAt(tile.getXPos() - 1, tile.getYPos()));
-                    combining.combine();
+                    Tile tile2 = theBoard.getTileAt(tile.getXPos() - 1, tile.getYPos());
+                    this.combine(tile, tile2);
                 }
                 break;
             case "s":
                 if (tile.getXPos() + 1 < theBoard.getSize() && theBoard.getTileAt(tile.getXPos() + 1, tile.getYPos()).getCurrNum() == 0) {
                     return true;
                 }else if (tile.getXPos() + 1 < theBoard.getSize()){
-                    combining.setBlock1(theBoard.getTileAt(tile.getXPos(),tile.getYPos()));
-                    combining.setBlock2(theBoard.getTileAt(tile.getXPos() + 1, tile.getYPos()));
-                    combining.combine();
+                    Tile tile2 = theBoard.getTileAt(tile.getXPos() + 1, tile.getYPos());
+                    this.combine(tile, tile2);
                 }
                 break;
             case "a":
                 if (tile.getYPos() - 1 >= 0 && theBoard.getTileAt(tile.getXPos() , tile.getYPos() - 1).getCurrNum() == 0 ) {
                     return true;
                 }else if (tile.getYPos() - 1 >= 0 ){
-                    combining.setBlock1(theBoard.getTileAt(tile.getXPos(), tile.getYPos()));
-                    combining.setBlock2(theBoard.getTileAt(tile.getXPos(), tile.getYPos() - 1));
-                    combining.combine();
+                    Tile tile2 = theBoard.getTileAt(tile.getXPos(), tile.getYPos() - 1);
+                    this.combine(tile, tile2);
                 }
                 break;
             case "d":
                 if (tile.getYPos() + 1 < theBoard.getSize() && theBoard.getTileAt(tile.getXPos() , tile.getYPos() + 1).getCurrNum() == 0 ) {
                     return true;
                 } else if (tile.getYPos()  + 1 < theBoard.getSize()){
-                    combining.setBlock1(theBoard.getTileAt(tile.getXPos(),tile.getYPos()));
-                    combining.setBlock2(theBoard.getTileAt(tile.getXPos(), tile.getYPos() + 1));
-                    combining.combine();
+                    Tile tile2 = theBoard.getTileAt(tile.getXPos(), tile.getYPos() + 1);
+                    this.combine(tile, tile2);
                 }
                 break;
             default:
@@ -150,10 +145,16 @@ public class Movement {
         }
     }
 
-    public Combining getCombining() {
-        // Probably won't be needed when combine is refactored into movement
-        // Temp for GameManager implementation
-        return combining;
+
+    public void combine(Tile tile1, Tile tile2) throws OutOfBoardException {
+        if(tile1.equals(tile2)){
+            int newNumber = tile2.getCurrNum() * 2;
+            tile1.setCurrNum(0);
+            tile2.setCurrNum(newNumber);
+            this.theBoard.replaceTile(tile1.getXPos(),tile2.getYPos(),tile1);
+            this.theBoard.replaceTile(tile2.getXPos(),tile2.getYPos(),tile2);
+        }
+
     }
 
     public Board getTheBoard(){return theBoard;}
