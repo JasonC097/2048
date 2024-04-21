@@ -24,9 +24,7 @@ class MovementTest {
 
     @Test
     void moveTileUp() throws TileOccupiedException, OutOfBoardException {
-        Scanner scanner = getScanner("w");
-        myMovement.moveTile(scanner);
-        scanner.nextLine();
+        myMovement.moveTile("w");
         assertEquals(myMovement.getTheBoard().getTileAt(0,1).getCurrNum(),2);
         assertEquals(myMovement.getTheBoard().getTileAt(1,1).getCurrNum(), 4);
         assertEquals(myMovement.getTheBoard().getTileAt(0,2).getCurrNum(), 8);
@@ -34,9 +32,7 @@ class MovementTest {
     }
     @Test
     void moveTileDown() throws TileOccupiedException, OutOfBoardException {
-        Scanner scanner = getScanner("s");
-        myMovement.moveTile(scanner);
-        scanner.nextLine();
+        myMovement.moveTile("s");
         assertEquals(myMovement.getTheBoard().getTileAt(4,1).getCurrNum(),2);
         assertEquals(myMovement.getTheBoard().getTileAt(5,1).getCurrNum(), 4);
         assertEquals(myMovement.getTheBoard().getTileAt(5,2).getCurrNum(), 8);
@@ -44,18 +40,14 @@ class MovementTest {
     }
     @Test
     void moveTileRight() throws TileOccupiedException, OutOfBoardException {
-        Scanner scanner = getScanner("d");
-        myMovement.moveTile(scanner);
-        scanner.nextLine();
+        myMovement.moveTile("d");
         assertEquals(myMovement.getTheBoard().getTileAt(2,5).getCurrNum(),2);
         assertEquals(myMovement.getTheBoard().getTileAt(3,4).getCurrNum(), 4);
         assertEquals(myMovement.getTheBoard().getTileAt(3,5).getCurrNum(), 8);
     }
     @Test
     void moveTileLeft() throws TileOccupiedException, OutOfBoardException {
-        Scanner scanner = getScanner("a");
-        myMovement.moveTile(scanner);
-        scanner.nextLine();
+        myMovement.moveTile("a");
         assertEquals(myMovement.getTheBoard().getTileAt(2,0).getCurrNum(),2);
         assertEquals(myMovement.getTheBoard().getTileAt(3,0).getCurrNum(), 4);
         assertEquals(myMovement.getTheBoard().getTileAt(3,1).getCurrNum(), 8);

@@ -53,11 +53,27 @@ public class GameManager {
     }
 
     /**
-     * Player lost is defined as no more possible movements can be made
+     * Player lose is defined as no more possible movements can be made
      * @return boolean true if player can not make more moves. Otherwise, return false if possible moves can still be made
      */
-    private boolean didPlayerLost(){
-
-        return false;
+    private boolean didPlayerLose() throws TileOccupiedException, OutOfBoardException {
+        // Create copy of board and movement to not interfere with user's current board
+        // Used for predicting possible movements
+        Board tempBoard = this.board;
+        Movement tempMovement = new Movement(tempBoard);
+        // Try each possible movement; board will change when combination happens
+        tempMovement.moveTile("w");
+        tempMovement.moveTile("s");
+        tempMovement.moveTile("a");
+        tempMovement.moveTile("d");
+        // Check if board changed from any possible movement
+        if (tempMovement.getTheBoard() == this.board){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
+
+
 }

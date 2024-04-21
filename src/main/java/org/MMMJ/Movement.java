@@ -85,10 +85,10 @@ public class Movement {
         return false;
     }
 
-    public void moveTile(Scanner scnr) throws TileOccupiedException, OutOfBoardException {
+    public void moveTile(String userInput) throws TileOccupiedException, OutOfBoardException {
 //        scnr = new Scanner(System.in);
-        System.out.println("Enter direction you want to head in:");
-        switch(scnr.next()){
+
+        switch(userInput){
             case "w":
                 for(Tile[] row : theBoard.getBoard()){
                     for(Tile tile : row) {
@@ -169,7 +169,9 @@ public class Movement {
         GenerateTiles generateTiles = new GenerateTiles(movement.theBoard);
         movement.theBoard.printBoard();
         for (int i = 0; i < 100 ; i++) {
-            movement.moveTile(scnr);
+            System.out.println("Enter direction you want to head in:");
+            String userInput = scnr.nextLine(); // Create an invalid user input handler
+            movement.moveTile(userInput);
             generateTiles.generateNewTile();
             int[] emptyPos = generateTiles.findEmptyPosition();
             movement.theBoard.addTile(emptyPos[0],emptyPos[1], generateTiles.generateNewTile());
