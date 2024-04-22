@@ -26,8 +26,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import org.MMMJ.Board;
+import org.MMMJ.Movement;
 import org.MMMJ.Tile;
-
 
 
 public class FXMLController {
@@ -55,13 +55,25 @@ public class FXMLController {
 
 
     @FXML
-    void initialize(){
-        System.out.println(Arrays.deepToString(array2D.get()));
+    void initialize() throws Exception {
+        theBoard.initBoard();
         assert btnNewGame != null : "fx:id=\"btnNewGame\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert labelScore != null : "fx:id=\"labelScore\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         initBindings();
         initEventHandlers();
+        Tile tile = new Tile(2);
+        Tile[][] tiles = new Tile[4][4];
+        for (int i = 0; i < 4 ; i++) {
+            for (int j = 0; j < 4 ; j++) {
+                Tile tile1 = new Tile(0);
+                tiles[i][j] = tile1;
+                tile1.setXPos(i);
+                tile1.setYPos(j);
+            }
+        }
+        tiles[0][0] = tile;
+        array2D.set(tiles);
     }
 
     /**
@@ -69,6 +81,7 @@ public class FXMLController {
      * grid pane in Scene Builder
      */
     public void initBindings() {
+        System.out.println("here1");
         array2D.arrayProperty().addListener((observableValue, tiles, t1) -> {
             updateLabelInGridPane(t1);
         });
@@ -91,12 +104,6 @@ public class FXMLController {
      * A method used to update the board when specific ques are given
      */
     public void initEventHandlers(){
-        btnNewGame.setOnAction(actionEvent -> {
-            labelScore.textProperty().set("0");
-        });
-
-        tileGrid.setOnKeyPressed(keyEvent -> {
-            array2D.set(theBoard.getBoard());
-        });
+        //tileGrid.setOnKeyPressed()
     }
 }
