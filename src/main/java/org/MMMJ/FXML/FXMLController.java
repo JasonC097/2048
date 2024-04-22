@@ -18,22 +18,16 @@
  */
 package org.MMMJ.FXML;
 
-import java.awt.event.KeyEvent;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
-
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import org.MMMJ.Board;
-import org.MMMJ.Movement;
 import org.MMMJ.Tile;
+
 
 
 public class FXMLController {
@@ -55,45 +49,54 @@ public class FXMLController {
     @FXML
     private GridPane tileGrid;
 
-    private Tile[][] array = theBoard.getBoard();
+    /**An instance of the {@link ObservableArray2D} class that is used to create the values
+     * in the board **/
+    private ObservableArray2D<Tile> array2D = new ObservableArray2D<Tile>(theBoard.getBoard());
 
 
     @FXML
-    void initialize() {
+    void initialize(){
+        System.out.println(Arrays.deepToString(array2D.get()));
         assert btnNewGame != null : "fx:id=\"btnNewGame\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert labelScore != null : "fx:id=\"labelScore\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
-
-        System.out.println(array[0][0].getCurrNum());
-        array[0][0].setCurrNum(4);
-        initBinidings();
-        System.out.println("here");
+        initBindings();
         initEventHandlers();
     }
+
     /**
-     * set up bindings for the game
+     * Uses a listener to bind the values in a 2D array to the labels within the
+     * grid pane in Scene Builder
      */
-    public void initBinidings(){
-        for (int row = 0; row < array.length; row++) {
-            for (int col = 0; col < array[row].length; col++) {
-                Label label = (Label) tileGrid.lookup("#label" + row + col);
-                ObjectProperty<String> valueProperty = new SimpleObjectProperty<>(Integer.toString(array[row][col].getCurrNum()));
-                label.textProperty().bindBidirectional(valueProperty);
+    public void initBindings() {
+        array2D.arrayProperty().addListener((observableValue, tiles, t1) -> {
+            updateLabelInGridPane(t1);
+        });
+    }
+
+    /**
+     * A helper method used to set the text of the label to the value in the array given
+     * @param array - an array of tile objects
+     */
+    private void updateLabelInGridPane(Tile[][] array){
+        for (int row = 0; row < array.length; row++){
+            for (int col = 0; col < array[row].length; col++){
+                Label label = (Label) tileGrid.lookup("#label" +row + col);
+                label.setText(String.valueOf(array[row][col].getCurrNum()));
             }
         }
     }
 
     /**
-     * Set up event handlers
+     * A method used to update the board when specific ques are given
      */
     public void initEventHandlers(){
-        System.out.println("event");
-        tileGrid.setOnKeyPressed(KeyEvent -> {
-            System.out.println("Key pressed: " + KeyEvent.getCode());
-            for (Node node : tileGrid.getChildren()) {
-                ((Label) node).setText("New Value");
-                }
+        btnNewGame.setOnAction(actionEvent -> {
+            labelScore.textProperty().set("0");
+        });
+
+        tileGrid.setOnKeyPressed(keyEvent -> {
+            array2D.set(theBoard.getBoard());
         });
     }
-
 }
