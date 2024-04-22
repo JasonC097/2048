@@ -15,6 +15,8 @@
  * **************************************** */
 package org.MMMJ;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.paint.Color;
 
 public class Tile {
@@ -89,8 +91,7 @@ public class Tile {
         this.yPos = yPos;
     }
 
-
-
-
-
+    public SimpleIntegerProperty valueProperty() {
+        return new SimpleIntegerProperty(this.currNum);
+    }
 }
