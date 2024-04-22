@@ -43,14 +43,6 @@ public class Board {
         initBoard();
     }
 
-    /**
-     * Helper constructor for creating a copy of whether the player lost
-     * @param boardCopy - the current board the player has
-     */
-    public Board(Board boardCopy){
-        this.board = boardCopy.getBoard();
-        this.size = boardCopy.getSize();
-    }
 
     /**
      * Setter method to help with cloning the board

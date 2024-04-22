@@ -18,7 +18,6 @@
  */
 package org.MMMJ;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -97,11 +96,27 @@ public class GameManager {
         tempMovement.moveTile("a");
         tempMovement.moveTile("d");
         // Check if board changed from any possible movement
-        if (Arrays.deepEquals(tempMovement.getTheBoard().getBoard(), this.board.getBoard())){
-            return true;
-        } else {
-            return false;
+        return areBoardsSame(tempBoard);
+    }
+
+    /**
+     * Helper method to determine whether the boards are equivalent to each other
+     * @param tempBoard
+     * @return
+     */
+    private boolean areBoardsSame(Board tempBoard) {
+        // Iterate through each row and column coordinate pair to see if tiles are different
+        for (int row = 0; row < this.board.getSize(); row++){
+            for (int column = 0; column < this.board.getSize(); column++){
+                Tile originalTile1 = this.board.getTileAt(row, column);
+                Tile tempBoardTile = tempBoard.getTileAt(row, column);
+                if (!originalTile1.equals(tempBoardTile)){
+                    return false;
+                }
+            }
         }
+        // If no difference present, then boards are the same
+        return true;
     }
 
     /**
@@ -119,5 +134,7 @@ public class GameManager {
         }
         return tempBoard;
     }
+
+
 
 }
