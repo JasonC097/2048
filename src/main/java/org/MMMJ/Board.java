@@ -43,6 +43,13 @@ public class Board {
         initBoard();
     }
 
+
+    /**
+     * Setter method to help with cloning the board
+     * @param board the Tile[][] object to be wrapped as a board object
+     */
+    public void setBoard(Tile[][] board) { this.board = board;}
+
     /**
      * @return gets the 2D representation of the board
      */

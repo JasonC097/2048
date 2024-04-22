@@ -5,14 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import javafx.scene.Node;
-import javafx.scene.Parent;
-
-
 import java.io.IOException;
 
 public class FXMLMain extends Application {
+
+    public FXMLController controller;
 
     public static void main(String[] args) {
         launch(args);
@@ -25,6 +22,7 @@ public class FXMLMain extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/2048.fxml"));
         Parent root = loader.load();
+        this.controller = loader.getController();
         //set up the stage and show it
         primaryStage.setTitle("2048 Game");
         primaryStage.setScene(new Scene(root));

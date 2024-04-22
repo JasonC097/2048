@@ -68,10 +68,11 @@ public class Combining {
         Combining combining = new Combining(board);
     }
 
+    public Tile getBlock2() {
+        return block2;
+    }
 
-
-
-
-
-
+    public Tile getBlock1() {
+        return block1;
+    }
 }
