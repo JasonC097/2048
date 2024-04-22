@@ -39,7 +39,13 @@ public class Movement {
         this.theBoard = new Board(5);
     }
 
-
+    /**
+     * Determines if a tile can move to an empty tile or not and if combining event can happen
+     * @param tile - The tile being moved
+     * @param key - The direction the player wants to do a move
+     * @return true if the tile can move to an empty tile. Otherwise, false
+     * @throws OutOfBoardException - when trying to place a tile out of bounds of the board
+     */
     public boolean checkCollision(Tile tile ,String key) throws OutOfBoardException {
         switch (key){
             case "w":
@@ -145,7 +151,12 @@ public class Movement {
         }
     }
 
-
+    /**
+     * Combining method to determine if combining can happen, and if so, updating the board when necessary
+     * @param tile1 - The tile being combined into tile2
+     * @param tile2 - The tile that is being updated
+     * @throws OutOfBoardException - thrown when trying to replace a tile outside the board
+     */
     public void combine(Tile tile1, Tile tile2) throws OutOfBoardException {
         if(tile1.equals(tile2)){
             int newNumber = tile2.getCurrNum() * 2;
@@ -156,7 +167,7 @@ public class Movement {
         }
 
     }
-
+    /** Getter method that returns the board*/
     public Board getTheBoard(){return theBoard;}
 
     public static void main(String[] args) throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
