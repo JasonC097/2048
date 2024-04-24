@@ -38,8 +38,8 @@ public class GenerateTiles {
      * @return the tile object with the new number
      */
     public Tile generateNewTile(){
-        int ratio = random.nextInt(2);
-        if(ratio == 1){
+        int ratio = random.nextInt(100);
+        if(ratio <= 75){
             return new Tile(2);
         }else{
             return new Tile(4);

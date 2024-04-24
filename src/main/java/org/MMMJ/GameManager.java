@@ -34,6 +34,8 @@ public class GameManager {
 
     private Movement movement; // Sounds clunky, change later to maybe something abstract or interface
 
+    private GenerateTiles generateTiles;
+
     /**
      * Constructor class for GameManager that generates the default board and movement
      */
@@ -41,6 +43,7 @@ public class GameManager {
         this.board = new Board(BOARD_SIZE);
         this.gameEndNumber = 2048; //Default way for user to win
         this.movement = new Movement(this.board);
+        this.generateTiles = new GenerateTiles(this.board);
 
         // Probably make customization to let person play with smaller number if 2048 is too hard to achieve
         // Or make larger number if 2048 too easy
@@ -56,6 +59,7 @@ public class GameManager {
         this.board = new Board(userDesiredSize);
         this.gameEndNumber = userDesiredEndNum;
         this.movement = new Movement(this.board);
+        this.generateTiles = new GenerateTiles(this.board);
     }
     /** Getter method for accessing the board for unit testing*/
     public Board getBoard() {return board;}
@@ -101,8 +105,8 @@ public class GameManager {
 
     /**
      * Helper method to determine whether the boards are equivalent to each other
-     * @param tempBoard
-     * @return
+     * @param tempBoard - the copy of the board before movement happened
+     * @return boolean true if the boards are the same. Otherwise, returns false
      */
     private boolean areBoardsSame(Board tempBoard) {
         // Iterate through each row and column coordinate pair to see if tiles are different
@@ -135,6 +139,38 @@ public class GameManager {
         return tempBoard;
     }
 
+    /**
+     * Used to get the score of the game by summing up the numbers on the board
+     * @return the sum of the numbers on the board
+     */
+    public int getScore(){
+        int score = 0;
+        for (int row = 0; row < this.board.getSize(); row++){
+            for (int column = 0; column < this.board.getSize(); column++){
+                Tile curTile = this.board.getTileAt(row, column);
+                score += curTile.getCurrNum();
+            }
+        }
+        return score;
+    }
 
-
+    /**
+     * Sees if there was any change in the board to generate new tiles for the player
+     * If there is, place a new tile on the board
+     * @param userInput - The key/movement the player did
+     * @throws OutOfBoardException - when handling movement of the board
+     * @throws TileOccupiedException - when trying to generate a new tile
+     */
+    public void processUserInputForNewTile(String userInput) throws OutOfBoardException, TileOccupiedException, BoardIsFullException {
+        Board tempBoard = makeCopyOfBoard();
+        Movement tempMovement = new Movement(tempBoard);
+        // Shouldn't need to worry about invalid inputs since moveTile handles wrong inputs
+        tempMovement.moveTile(userInput);
+        if (!areBoardsSame(tempMovement.getTheBoard())){
+            int [] emptySpot = this.generateTiles.findEmptyPosition();
+            // Index 0 refers to the row of the empty tile location
+            // Index 1 refers to the column of the empty tile location
+            this.board.addTile(emptySpot[0], emptySpot[1], this.generateTiles.generateNewTile());
+        }
+    }
 }

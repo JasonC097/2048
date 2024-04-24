@@ -55,4 +55,22 @@ class GameManagerTest {
         // Should now be true since no more moves possible
         assertTrue(this.game.didPlayerLose());
     }
+
+    @Test
+    void getScore() throws TileOccupiedException, OutOfBoardException {
+        //Score default from setting up JUnit tests
+        assertEquals(this.game.getScore(), 27);
+        // Add some more tiles and see if score is updating
+        this.game.getBoard().addTile(0,1, new Tile(15));
+        assertEquals(this.game.getScore(), 42);
+        this.game.getBoard().addTile(1,0, new Tile(24));
+        assertEquals(this.game.getScore(), 66);
+        this.game.getBoard().addTile(1,2,new Tile(34));
+        assertEquals(this.game.getScore(), 100);
+    }
+
+    @Test
+    void processUserInputForNewTile(){
+
+    }
 }
