@@ -19,6 +19,7 @@
 package org.MMMJ.FXML;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,41 +65,19 @@ public class FXMLController {
      * in the board **/
     private ObservableArray2D<Tile> array2D = new ObservableArray2D<Tile>(theBoard.getBoard());
 
-    private Movement movement = new Movement();
+    private Movement movement = new Movement(theBoard);
 
 
     @FXML
-    void initialize(){
-        theBoard.initBoard();
+    void initialize() throws TileOccupiedException, OutOfBoardException {
         assert btnNewGame != null : "fx:id=\"btnNewGame\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert labelScore != null : "fx:id=\"labelScore\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
-        initBindings();
-        Tile tile = new Tile(2);
-        Tile[][] tiles = new Tile[4][4];
-        for (int i = 0; i < 4 ; i++) {
-            for (int j = 0; j < 4 ; j++) {
-                Tile tile1 = new Tile(0);
-                tiles[i][j] = tile1;
-                tile1.setXPos(i);
-                tile1.setYPos(j);
-            }
-        }
-        tiles[0][0] = tile;
-        array2D.set(tiles);
-
+        theBoard.initBoard();
+        theBoard.addTile(3,3,new Tile(2));
+        array2D.set(theBoard.getBoard());
+        updateLabelInGridPane(array2D.get());
         initEventHandlers();
-    }
-
-    /**
-     * Uses a listener to bind the values in a 2D array to the labels within the
-     * grid pane in Scene Builder
-     */
-    public void initBindings() {
-        System.out.println("here1");
-        array2D.arrayProperty().addListener((observableValue, tiles, t1) -> {
-            updateLabelInGridPane(t1);
-        });
     }
 
     /**
@@ -117,11 +96,45 @@ public class FXMLController {
     /**
      * A method used to update the board when specific ques are given
      */
-    public void initEventHandlers() {
-        System.out.println("event");
+    public void initEventHandlers(){
         btnUp.setOnAction(keyEvent -> {
             try {
-                array2D.set(movement.moveTile("w"));
+                movement.moveTile("w");
+                array2D.set(theBoard.getBoard());
+                updateLabelInGridPane(array2D.get());
+            } catch (TileOccupiedException e) {
+                throw new RuntimeException(e);
+            } catch (OutOfBoardException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        btnDown.setOnAction(keyEvent -> {
+            try {
+                movement.moveTile("s");
+                array2D.set(theBoard.getBoard());
+                updateLabelInGridPane(array2D.get());
+            } catch (TileOccupiedException e) {
+                throw new RuntimeException(e);
+            } catch (OutOfBoardException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        btnLeft.setOnAction(keyEvent -> {
+            try {
+                movement.moveTile("a");
+                array2D.set(theBoard.getBoard());
+                updateLabelInGridPane(array2D.get());
+            } catch (TileOccupiedException e) {
+                throw new RuntimeException(e);
+            } catch (OutOfBoardException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        btnRight.setOnAction(keyEvent -> {
+            try {
+                movement.moveTile("d");
+                array2D.set(theBoard.getBoard());
+                updateLabelInGridPane(array2D.get());
             } catch (TileOccupiedException e) {
                 throw new RuntimeException(e);
             } catch (OutOfBoardException e) {
@@ -129,22 +142,10 @@ public class FXMLController {
             }
         });
 
-
-        btnNewGame.setOnAction(actionEvent -> {
-            System.out.println("button");
-            Tile[][] tiles = new Tile[4][4];
-            for (int i = 0; i < 4 ; i++) {
-                for (int j = 0; j < 4 ; j++) {
-                    Tile tile1 = new Tile(0);
-                    tiles[i][j] = tile1;
-                    tile1.setXPos(i);
-                    tile1.setYPos(j);
-                }
-            }
-            array2D.set(tiles);
-        });
+//        btnNewGame.setOnAction(actionEvent -> {
+//            array2D.set(tiles);
+//        });
     }
-
         /**
          * need to have moveTile take in a string
          * need movement to properly handle the board instead of the console
@@ -152,5 +153,4 @@ public class FXMLController {
          * Made exceptions their own class
          * changed board constructor to add 0s
          */
-    }
 }
