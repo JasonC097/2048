@@ -15,18 +15,6 @@
  * **************************************** */
 package org.MMMJ;
 
-class OutOfBoardException extends Exception{
-    public OutOfBoardException(String msg){
-        super(msg);
-    }
-}
-
-class TileOccupiedException extends  Exception{
-    public TileOccupiedException(String msg){
-        super(msg);
-    }
-}
-
 public class Board {
     /**
      * 2d representation of the board

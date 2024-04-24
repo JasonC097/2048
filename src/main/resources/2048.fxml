@@ -11,14 +11,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: floralwhite;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.MMMJ.FXML.FXMLController">
    <children>
-      <Label layoutX="121.0" layoutY="8.0" prefHeight="46.0" prefWidth="96.0" style="-fx-font-weight: bold;" text="2048" textFill="#909090" AnchorPane.topAnchor="8.0">
-         <font>
-            <Font size="37.0" />
-         </font>
-      </Label>
       <Button fx:id="btnNewGame" layoutX="393.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: burlywood;" text="New Game" textFill="#fffefe" AnchorPane.rightAnchor="129.0" AnchorPane.topAnchor="37.0" />
-      <Label fx:id="labelScore" layoutX="393.0" layoutY="14.0" style="-fx-background-color: Burlywood;" text="Score:" textFill="WHITE" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="14.0" />
-      <Label layoutX="121.0" layoutY="46.0" text="Join the tiles, get to 2048!" textFill="#909090" />
       <GridPane fx:id="tileGrid" alignment="CENTER" gridLinesVisible="true" layoutX="121.0" layoutY="71.0" style="-fx-background-color: burlywood;" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="71.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -163,5 +156,16 @@
             </Label>
          </children>
       </GridPane>
+      <Label layoutX="121.0" layoutY="8.0" prefHeight="46.0" prefWidth="96.0" style="-fx-font-weight: bold;" text="2048" textFill="#909090" AnchorPane.topAnchor="8.0">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelScore" layoutX="393.0" layoutY="14.0" style="-fx-background-color: Burlywood;" text="Score:" textFill="WHITE" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="14.0" />
+      <Label layoutX="121.0" layoutY="46.0" text="Join the tiles, get to 2048!" textFill="#909090" />
+      <Button fx:id="btnUp" layoutX="45.0" layoutY="122.0" mnemonicParsing="false" text="Up" textFill="#fffefe" />
+      <Button fx:id="btnDown" layoutX="45.0" layoutY="166.0" mnemonicParsing="false" text="Down" textFill="#fffefe" />
+      <Button fx:id="btnLeft" layoutX="45.0" layoutY="218.0" mnemonicParsing="false" text="Left" textFill="#fffefe" />
+      <Button fx:id="btnRight" layoutX="45.0" layoutY="264.0" mnemonicParsing="false" text="Right" textFill="#fffefe" />
    </children>
 </AnchorPane>

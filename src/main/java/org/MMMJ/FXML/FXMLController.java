@@ -19,15 +19,14 @@
 package org.MMMJ.FXML;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import org.MMMJ.Board;
-import org.MMMJ.Movement;
-import org.MMMJ.Tile;
+import org.MMMJ.*;
 
 
 public class FXMLController {
@@ -49,19 +48,32 @@ public class FXMLController {
     @FXML
     private GridPane tileGrid;
 
+    @FXML
+    private Button btnUp;
+
+    @FXML
+    private Button btnDown;
+
+    @FXML
+    private Button btnLeft;
+
+    @FXML
+    private Button btnRight;
+
     /**An instance of the {@link ObservableArray2D} class that is used to create the values
      * in the board **/
     private ObservableArray2D<Tile> array2D = new ObservableArray2D<Tile>(theBoard.getBoard());
 
+    private Movement movement = new Movement();
+
 
     @FXML
-    void initialize() throws Exception {
+    void initialize(){
         theBoard.initBoard();
         assert btnNewGame != null : "fx:id=\"btnNewGame\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert labelScore != null : "fx:id=\"labelScore\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         initBindings();
-        initEventHandlers();
         Tile tile = new Tile(2);
         Tile[][] tiles = new Tile[4][4];
         for (int i = 0; i < 4 ; i++) {
@@ -74,6 +86,8 @@ public class FXMLController {
         }
         tiles[0][0] = tile;
         array2D.set(tiles);
+
+        initEventHandlers();
     }
 
     /**
@@ -103,7 +117,40 @@ public class FXMLController {
     /**
      * A method used to update the board when specific ques are given
      */
-    public void initEventHandlers(){
-        //tileGrid.setOnKeyPressed()
+    public void initEventHandlers() {
+        System.out.println("event");
+        btnUp.setOnAction(keyEvent -> {
+            try {
+                array2D.set(movement.moveTile("w"));
+            } catch (TileOccupiedException e) {
+                throw new RuntimeException(e);
+            } catch (OutOfBoardException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
+        btnNewGame.setOnAction(actionEvent -> {
+            System.out.println("button");
+            Tile[][] tiles = new Tile[4][4];
+            for (int i = 0; i < 4 ; i++) {
+                for (int j = 0; j < 4 ; j++) {
+                    Tile tile1 = new Tile(0);
+                    tiles[i][j] = tile1;
+                    tile1.setXPos(i);
+                    tile1.setYPos(j);
+                }
+            }
+            array2D.set(tiles);
+        });
+    }
+
+        /**
+         * need to have moveTile take in a string
+         * need movement to properly handle the board instead of the console
+         * btnNewGame is the only thing that allows scenebuilder to change
+         * Made exceptions their own class
+         * changed board constructor to add 0s
+         */
     }
 }
