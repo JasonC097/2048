@@ -91,7 +91,8 @@ public class Tile {
         this.yPos = yPos;
     }
 
-    public SimpleIntegerProperty valueProperty() {
-        return new SimpleIntegerProperty(this.currNum);
-    }
+
+
+
+
 }

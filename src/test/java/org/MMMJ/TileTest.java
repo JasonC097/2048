@@ -24,7 +24,7 @@ class TileTest {
     @Test
     void testToString() {
         Tile tile2 = new Tile();
-        assertEquals(tile1.toString(), "2");
-        assertEquals(tile2.toString()," ");
+        assertEquals(tile1.toString(), "   2");
+        assertEquals(tile2.toString(),"    ");
     }
 }
