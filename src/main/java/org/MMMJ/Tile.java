@@ -22,16 +22,20 @@ import javafx.scene.paint.Color;
 public class Tile {
     private int currNum;
 
-    private Color currColor;
-
     private int xPos;
 
     private int yPos;
 
+    /**
+     * Constructor for the tile class
+     */
     public Tile(){
         this.currNum = 0;
     }
 
+    /**
+     * Constructor for the tile class that allows for tiles with numbers other than 0
+     */
     public Tile(int tileNumber){
         this.currNum = tileNumber;
     }
@@ -39,7 +43,6 @@ public class Tile {
 
     /**
      * Equals method which comes to true if the two Tile objects have the same current number
-     *
      * @param tile2 the tile its being compared to
      * @return whether it comes out to true
      * @Author Miguel Romero
@@ -52,11 +55,9 @@ public class Tile {
         }
     }
 
-
-
-
-
-
+    /**
+     * Returns the string representation of the tile
+     */
     @Override
     public String toString() {
         if(this.currNum == 0){
@@ -73,26 +74,39 @@ public class Tile {
         return currNum;
     }
 
+    /**
+     * sets the current number of the tile
+     * @param newNum - new current number
+     */
     public void setCurrNum(int newNum){
         this.currNum = newNum;
     }
 
+    /**
+     * gets the x position of the tile
+     * @return - xPos
+     */
     public int getXPos(){return this.xPos;}
 
-
+    /**
+     * gets the y position of the tile
+     * @return - yPos
+     */
     public int getYPos(){return this.yPos;}
 
-
+    /**
+     * sets the x position of the tile
+     * @param xPos - x position
+     */
     public void setXPos(int xPos){
         this.xPos = xPos;
     }
 
+    /**
+     * sets the y position of the tile
+     * @param yPos - y position
+     */
     public void setYPos(int yPos){
         this.yPos = yPos;
     }
-
-
-
-
-
 }

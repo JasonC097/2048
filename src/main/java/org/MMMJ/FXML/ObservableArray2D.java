@@ -22,8 +22,9 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 
-public class ObservableArray2D<T> implements Observable {
+public class ObservableArray2D<T> implements Observable{
     /** A {@link SimpleObjectProperty}**/
     private final ObjectProperty<T[][]> arrayProperty = new SimpleObjectProperty<>();
 
@@ -60,13 +61,22 @@ public class ObservableArray2D<T> implements Observable {
         arrayProperty.set(array);
     }
 
+    /**
+     * Adds a listener to the array property to check if an event occurs
+     * @param listener - the type of listener
+     */
     @Override
     public void addListener(InvalidationListener listener) {
         arrayProperty.addListener(listener);
     }
 
+    /**
+     * removes a listener from the array property
+     * @param listener - the type of listener
+     */
     @Override
     public void removeListener(InvalidationListener listener) {
         arrayProperty.removeListener(listener);
     }
+
 }

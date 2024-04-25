@@ -8,14 +8,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class FXMLMain extends Application {
-
+    /** An instance of the {@link FXMLController} class**/
     public FXMLController controller;
 
     public static void main(String[] args) {
         launch(args);
     }
 
-
+    /**
+     * Initialized the user interface for the game
+     * @param primaryStage
+     * @throws IOException
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         //Load the FXML file

@@ -25,6 +25,10 @@ public class Board {
      */
     private int size;
 
+    /**
+     * Constructor for the Board class
+     * @param boardSize - size of length of the rows and columns of the board
+     */
     public Board(int boardSize){
         this.size = boardSize;
         this.board = new Tile[size][size];
@@ -59,6 +63,9 @@ public class Board {
         }
     }
 
+    /**
+     * Prints out a string representation of the board in the terminal
+     */
     public void printBoard() {
         for (int i = 0; i < size ; i++) {
             for (int j = 0; j < size ; j++) {
@@ -68,13 +75,18 @@ public class Board {
         }
     }
 
-
-
-
-
-
+    /**
+     * Returns the size of the board
+     * @return size
+     */
     public int getSize(){return this.size;}
 
+    /**
+     * returns the tile at a specific index of the board
+     * @param row - row of the board
+     * @param col - column of the board
+     * @return index of the row/col
+     */
     public Tile getTileAt(int row, int col){return this.board[row][col];}
 
     /**
@@ -125,6 +137,11 @@ public class Board {
         }
     }
 
+    /**
+     * Checks to see if the board is full, by iterating through and
+     * checking to see if any indexes contain a 0
+     * @return - T if the board is full, F otherwise
+     */
     public boolean isBoardFull() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -150,42 +167,4 @@ public class Board {
 
 
     }
-
-    public boolean checkCollision(Tile tile ,String key){
-        switch (key){
-            case "w":
-                if(board[tile.getXPos()][tile.getYPos()-1].getCurrNum() != 0){
-                    return true;
-                }
-            case "s":
-                if(board[tile.getXPos()][tile.getYPos()+1].getCurrNum() != 0){
-                    return true;
-                }
-            case "a":
-                if(board[tile.getXPos()-1][tile.getYPos()].getCurrNum() != 0){
-                    return true;
-                }
-            case "d":
-                if(board[tile.getXPos()+1][tile.getYPos()].getCurrNum() != 0){
-                    return true;
-                }
-            default:
-                return false;
-        }
-    }
-
-    public void moveTile(String move, Tile[][] array){
-        switch(move){
-            case "s":
-                for (int row = 0; row < array.length; row++) {
-                    for (int col = 0; col < array[row].length; col++) {
-                            array[row+1][col] = array[row][col];
-                    }
-                }
-            default:
-                break;
-        }
-    }
-
-
 }

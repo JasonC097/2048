@@ -21,6 +21,10 @@ package org.MMMJ.FXML;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -65,6 +69,8 @@ public class FXMLController {
      * in the board **/
     private ObservableArray2D<Tile> array2D = new ObservableArray2D<Tile>(theBoard.getBoard());
 
+//    ObservableList<ObservableList<Tile>> array2D =
+    /**An instance of the {@link Movement} class**/
     private Movement movement = new Movement(theBoard);
 
 
@@ -77,7 +83,15 @@ public class FXMLController {
         theBoard.addTile(3,3,new Tile(2));
         array2D.set(theBoard.getBoard());
         updateLabelInGridPane(array2D.get());
+        initBindings();
         initEventHandlers();
+    }
+
+    public void initBindings(){
+        System.out.println("initBindings");
+        array2D.arrayProperty().addListener((observableValue, tiles, t1) ->
+                updateLabelInGridPane(t1));
+
     }
 
     /**
@@ -85,6 +99,7 @@ public class FXMLController {
      * @param array - an array of tile objects
      */
     private void updateLabelInGridPane(Tile[][] array){
+        System.out.println("Update the grid pane");
         for (int row = 0; row < array.length; row++){
             for (int col = 0; col < array[row].length; col++){
                 Label label = (Label) tileGrid.lookup("#label" +row + col);
@@ -98,59 +113,38 @@ public class FXMLController {
      */
     public void initEventHandlers(){
         btnUp.setOnAction(keyEvent -> {
-            try {
-                movement.moveTile("w");
-                array2D.set(theBoard.getBoard());
-                updateLabelInGridPane(array2D.get());
-            } catch (TileOccupiedException e) {
-                throw new RuntimeException(e);
-            } catch (OutOfBoardException e) {
-                throw new RuntimeException(e);
-            }
+            changeBoard("w");
         });
         btnDown.setOnAction(keyEvent -> {
-            try {
-                movement.moveTile("s");
-                array2D.set(theBoard.getBoard());
-                updateLabelInGridPane(array2D.get());
-            } catch (TileOccupiedException e) {
-                throw new RuntimeException(e);
-            } catch (OutOfBoardException e) {
-                throw new RuntimeException(e);
-            }
+            changeBoard("s");
         });
         btnLeft.setOnAction(keyEvent -> {
-            try {
-                movement.moveTile("a");
-                array2D.set(theBoard.getBoard());
-                updateLabelInGridPane(array2D.get());
-            } catch (TileOccupiedException e) {
-                throw new RuntimeException(e);
-            } catch (OutOfBoardException e) {
-                throw new RuntimeException(e);
-            }
+            changeBoard("a");
         });
         btnRight.setOnAction(keyEvent -> {
-            try {
-                movement.moveTile("d");
-                array2D.set(theBoard.getBoard());
-                updateLabelInGridPane(array2D.get());
-            } catch (TileOccupiedException e) {
-                throw new RuntimeException(e);
-            } catch (OutOfBoardException e) {
-                throw new RuntimeException(e);
-            }
+            changeBoard("d");
         });
 
 //        btnNewGame.setOnAction(actionEvent -> {
-//            array2D.set(tiles);
+//            theBoard.initBoard();
+//            array2D.set(theBoard.getBoard());
 //        });
     }
-        /**
-         * need to have moveTile take in a string
-         * need movement to properly handle the board instead of the console
-         * btnNewGame is the only thing that allows scenebuilder to change
-         * Made exceptions their own class
-         * changed board constructor to add 0s
-         */
+
+    /**
+     * A helper method that takes in a direction, then uses the movement class to
+     * move the tiles and finally update the array
+     * @param direction - direction the user wants the tiles to move
+     */
+    private void changeBoard(String direction) {
+        try {
+            movement.moveTile(direction);
+            array2D.set(theBoard.getBoard());
+            //updateLabelInGridPane(array2D.get());
+        } catch (TileOccupiedException e) {
+            throw new RuntimeException(e);
+        } catch (OutOfBoardException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

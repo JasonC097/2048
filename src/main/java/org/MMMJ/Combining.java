@@ -16,22 +16,26 @@
 package org.MMMJ;
 
 public class Combining {
-
     /**
      * The board
      */
     private Board theBoard;
 
-
     /**
      * The first block in which
      */
     private Tile block1;
+
     /**
      *  The second block and the block that the final tile will be placed
      */
     private Tile block2;
 
+    /**
+     * Constructor for the combining class
+     * @param block1 - first block to combine
+     * @param block2 - second block to combine
+     */
     public Combining(Tile block1, Tile block2){
         this.block1 = block1;
         this.block2 = block2;
@@ -41,6 +45,12 @@ public class Combining {
         this.theBoard = theBoard;
     }
 
+    /**
+     * Combines the two blocks by initially making sure the two are equal then
+     * setting block1 to 0 and block 2 to the new number
+     * @throws TileOccupiedException
+     * @throws OutOfBoardException
+     */
     public void combine() throws TileOccupiedException, OutOfBoardException {
         if(block1.equals(block2)){
             int newNumber = block2.getCurrNum() * 2;
@@ -52,11 +62,17 @@ public class Combining {
 
     }
 
+    /**
+     * Setter method to set the value of block1
+     */
     public void setBlock1(Tile block1){
         this.block1 = block1;
 
     }
 
+    /**
+     * Setter method to set the value of block2
+     */
     public void setBlock2(Tile block2){
         this.block2 = block2;
     }
@@ -68,10 +84,16 @@ public class Combining {
         Combining combining = new Combining(board);
     }
 
+    /**
+     * Getter method to get the value of block2
+     */
     public Tile getBlock2() {
         return block2;
     }
 
+    /**
+     * Getter method to get the value of block2
+     */
     public Tile getBlock1() {
         return block1;
     }
