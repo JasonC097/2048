@@ -15,19 +15,34 @@
  * **************************************** */
 package org.MMMJ;
 
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 public class Board {
     /**
      * 2d representation of the board
      */
-    private Tile[][] board;
+    private ObservableList<ObservableList<Tile>> board;
+
     /**
      *  the size the sides of the square board
      */
     private int size;
 
+    /**
+     * Constructor for the Board class
+     * @param boardSize - size of length of the rows and columns of the board
+     */
     public Board(int boardSize){
         this.size = boardSize;
-        this.board = new Tile[size][size];
+        this.board = FXCollections.<ObservableList<Tile>>observableArrayList();
         initBoard();
     }
 
@@ -36,12 +51,12 @@ public class Board {
      * Setter method to help with cloning the board
      * @param board the Tile[][] object to be wrapped as a board object
      */
-    public void setBoard(Tile[][] board) { this.board = board;}
+    public void setBoard(ObservableList<ObservableList<Tile>> board) { this.board = board;}
 
     /**
      * @return gets the 2D representation of the board
      */
-    public Tile[][] getBoard(){
+    public ObservableList<ObservableList<Tile>> getBoard(){
         return this.board;
     }
 
@@ -50,29 +65,42 @@ public class Board {
      */
     public void initBoard(){
         for (int i = 0; i < size ; i++) {
+            final ObservableList<Tile> row = FXCollections.<Tile>observableArrayList();
+            this.board.add(i,row);
             for (int j = 0; j < size ; j++) {
                 Tile tile1 = new Tile();
-                board[i][j] = tile1;
+                board.get(i).add(j, tile1);
                 tile1.setXPos(i);
                 tile1.setYPos(j);
             }
         }
     }
 
+    /**
+     * Prints out a string representation of the board in the terminal
+     */
     public void printBoard() {
         for (int i = 0; i < size ; i++) {
             for (int j = 0; j < size ; j++) {
-                System.out.print("|" + board[i][j]);
+                System.out.print("|" + board.get(i).get(j));
             }
             System.out.println("|");
         }
     }
 
-    /** Getter method of getting the size of the board*/
+    /**
+     * Returns the size of the board
+     * @return size
+     */
     public int getSize(){return this.size;}
 
-    /** Getter method of getting the current tile on the board at the wanted row and column*/
-    public Tile getTileAt(int row, int col){return this.board[row][col];}
+    /**
+     * returns the tile at a specific index of the board
+     * @param row - row of the board
+     * @param col - column of the board
+     * @return index of the row/col
+     */
+    public Tile getTileAt(int row, int col){return this.board.get(row).get(col);}
 
     /**
      * Adds a tile to the board in an unoccupied position
@@ -85,13 +113,15 @@ public class Board {
      */
     public void addTile(int row, int col, Tile tile) throws OutOfBoardException, TileOccupiedException {
         testTile(row, col);
-        this.board[row][col] = tile;
+
+        this.board.get(row).set(col, tile);
         tile.setXPos(row);
         tile.setYPos(col);
     }
 
+
     /**
-     * Replaces a tile of the of an occupied position
+     *  replaces a tile of the of an occupied position
      *
      * @param row the row of the new tile
      * @param col the col of the new tile
@@ -102,7 +132,7 @@ public class Board {
         if (row >= size || row < 0 || col < 0 || col >= size){
             throw new OutOfBoardException("ROW OR COL OUT OF BOARD " + row + ", " + col);
         }
-        this.board[row][col] = tile;
+        this.board.get(row).set(col, tile);
         tile.setXPos(row);
         tile.setYPos(col);
     }
@@ -117,26 +147,27 @@ public class Board {
     public void testTile(int row, int col) throws OutOfBoardException, TileOccupiedException {
         if (row >= size || row < 0 || col < 0 || col >= size){
             throw new OutOfBoardException("ROW OR COL OUT OF BOARD " + row + ", " + col);
-        }else if(this.board[row][col].getCurrNum() != 0 ){
+        }else if(this.board.get(row).get(col).getCurrNum() != 0 ){
             throw new TileOccupiedException("OCCUPIED TILE " + row +","+ col);
         }
     }
 
     /**
-     * Checks to see if there is currently an empty space still on the board to
-     * determine if the board is full or not
-     * @return true if the board is full. Otherwise, returns false
+     * Checks to see if the board is full, by iterating through and
+     * checking to see if any indexes contain a 0
+     * @return - T if the board is full, F otherwise
      */
     public boolean isBoardFull() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (board[i][j].getCurrNum() == 0) {
+                if (board.get(i).get(j).getCurrNum() == 0) {
                     return false;
                 }
             }
         }
         return true;
     }
+
 
     public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
         Board test = new Board(5);

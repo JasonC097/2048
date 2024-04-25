@@ -24,9 +24,16 @@ class BoardIsFullException extends Exception{
 }
 
 public class GenerateTiles {
+    /** A random number**/
     private Random random;
 
+    /** An instance of the {@link Board} class**/
     private Board board;
+
+    /**
+     * Constructor for the Generate tiles class
+     * @param board - a 2D tile array
+     */
     public GenerateTiles(Board board){
         this.random = new Random();
         this.board = board;
@@ -34,7 +41,6 @@ public class GenerateTiles {
 
     /**
      * Generates a new square between 2 and 4 has a ration that chooses between the two
-     *
      * @return the tile object with the new number
      */
     public Tile generateNewTile(){
@@ -65,17 +71,13 @@ public class GenerateTiles {
                 } catch (TileOccupiedException | OutOfBoardException e) {
                 }
             }
-
-
             emptyPos[0] = testRow;
             emptyPos[1] = testCol;
-
             return emptyPos;
-
-        }else{
+        }
+        else{
             throw new BoardIsFullException("Board is full");
         }
-
     }
 
 
@@ -89,14 +91,9 @@ public class GenerateTiles {
 
 
         board.printBoard();
-
-
         int[] emptyPos = generateTiles.findEmptyPosition();
-
         for (int pos: emptyPos){
             System.out.println(pos);
         }
-
-
     }
 }

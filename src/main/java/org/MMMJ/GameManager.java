@@ -18,6 +18,8 @@
  */
 package org.MMMJ;
 
+import javafx.collections.ObservableList;
+
 import java.util.Arrays;
 
 /**
@@ -75,7 +77,7 @@ public class GameManager {
      */
     public boolean didPlayerWin() {
         // Iterate through the board to find the winning number
-        for (Tile [] row : this.board.getBoard()){
+        for (ObservableList<Tile> row : this.board.getBoard()){
             for (Tile tile : row){
                 if (tile.getCurrNum() == this.gameEndNumber){
                     System.out.println("You win!");
