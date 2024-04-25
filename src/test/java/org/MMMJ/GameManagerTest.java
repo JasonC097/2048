@@ -70,7 +70,53 @@ class GameManagerTest {
     }
 
     @Test
-    void processUserInputForNewTile(){
+    void processUserInputForNewTile() throws OutOfBoardException, BoardIsFullException, TileOccupiedException {
+        Board compareBoard = this.game.makeCopyOfBoard();
+        // Should be exact replica of board
+        assertTrue(this.game.areBoardsSame(compareBoard));
 
+        // Let's make sure invalid key doesn't change the board
+        this.game.processUserInputForNewTile("g");
+        assertTrue(this.game.areBoardsSame(compareBoard));
+
+        // Now let's put a real possible movement
+        this.game.processUserInputForNewTile("w");
+        assertFalse(this.game.areBoardsSame(compareBoard));
+    }
+    @Test
+    void areBoardsSame () throws TileOccupiedException, OutOfBoardException {
+        // Shouldn't be the same as the pre-existing board from the setup
+        Board testBoard1 = new Board(3);
+        assertFalse(this.game.areBoardsSame(testBoard1));
+
+        // Should be able to return false if board is of different size
+        Board testBoard2 = new Board(4);
+        assertFalse(this.game.areBoardsSame(testBoard2));
+
+        testBoard1.addTile(1,1, new Tile(16));
+        testBoard1.addTile(0, 0, new Tile(2));
+        testBoard1.addTile(0, 2, new Tile(3));
+        testBoard1.addTile(2, 0, new Tile(1));
+        testBoard1.addTile(2, 2, new Tile(5));
+
+        // Should be the exact same boards
+        assertTrue(this.game.areBoardsSame(testBoard1));
+    }
+
+    @Test
+    void makeCopyOfBoard () throws OutOfBoardException, TileOccupiedException {
+        // Make an exact replica of the current board
+        Board copyBoard = this.game.makeCopyOfBoard();
+        assertTrue(this.game.areBoardsSame(copyBoard));
+
+        // Let's add a tile and see if the copy board makes the same board again
+        this.game.getBoard().addTile(1,0, new Tile(45));
+        Board copyBoard2 = this.game.makeCopyOfBoard();
+        assertTrue(this.game.areBoardsSame(copyBoard2));
+
+        // Let's do a movement and see if the board copier can still replicate the board
+        this.game.getMovement().moveTile("d");
+        Board copyBoard3 = this.game.makeCopyOfBoard();
+        assertTrue(this.game.areBoardsSame(copyBoard3));
     }
 }

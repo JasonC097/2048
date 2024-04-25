@@ -28,7 +28,7 @@ public class GameManager {
     /** The board of the game*/
     private Board board;
 
-    private final int BOARD_SIZE = 4; // Can change later for making custom board sizes
+    private int board_size; // Can change later for making custom board sizes
 
     private int gameEndNumber; // Change to 2048 for actual game, smaller number for testing only
 
@@ -37,10 +37,11 @@ public class GameManager {
     private GenerateTiles generateTiles;
 
     /**
-     * Constructor class for GameManager that generates the default board and movement
+     * Constructor class for GameManager that generates the default game of 4x4 board and goal of 2048
      */
     public GameManager() {
-        this.board = new Board(BOARD_SIZE);
+        this.board_size = 4; // Default board size if not specified
+        this.board = new Board(board_size);
         this.gameEndNumber = 2048; //Default way for user to win
         this.movement = new Movement(this.board);
         this.generateTiles = new GenerateTiles(this.board);
@@ -51,12 +52,13 @@ public class GameManager {
     }
 
     /**
-     * Constructor for user that wants a different board size and different number to get to
+     * Constructor for user that wants a different board size and different goal to get to
      * @param userDesiredSize - integer of the user's desired board size
      * @param userDesiredEndNum - integer of the user's desired end number
      */
     public GameManager(int userDesiredSize, int userDesiredEndNum){
-        this.board = new Board(userDesiredSize);
+        this.board_size = userDesiredSize;
+        this.board = new Board(this.board_size);
         this.gameEndNumber = userDesiredEndNum;
         this.movement = new Movement(this.board);
         this.generateTiles = new GenerateTiles(this.board);
@@ -108,8 +110,12 @@ public class GameManager {
      * @param tempBoard - the copy of the board before movement happened
      * @return boolean true if the boards are the same. Otherwise, returns false
      */
-    private boolean areBoardsSame(Board tempBoard) {
-        // Iterate through each row and column coordinate pair to see if tiles are different
+    public boolean areBoardsSame(Board tempBoard) {
+        // In case the boards are of different size for whatever reason
+        if (tempBoard.getSize() != this.board_size){
+            return false;
+        }
+        // Otherwise, iterate through each row and column coordinate pair to see if tiles are different
         for (int row = 0; row < this.board.getSize(); row++){
             for (int column = 0; column < this.board.getSize(); column++){
                 Tile originalTile1 = this.board.getTileAt(row, column);
@@ -128,7 +134,7 @@ public class GameManager {
      * @return Board copy of the player's current board
      * @throws OutOfBoardException - in case of placing a tile out of the board
      */
-    private Board makeCopyOfBoard() throws OutOfBoardException {
+    public Board makeCopyOfBoard() throws OutOfBoardException {
         Board tempBoard = new Board(this.board.getSize());
         for (int row = 0; row < this.board.getSize(); row++){
             for (int column = 0; column < this.board.getSize(); column++){
@@ -165,6 +171,7 @@ public class GameManager {
         Board tempBoard = makeCopyOfBoard();
         Movement tempMovement = new Movement(tempBoard);
         // Shouldn't need to worry about invalid inputs since moveTile handles wrong inputs
+        this.movement.moveTile(userInput);
         tempMovement.moveTile(userInput);
         if (!areBoardsSame(tempMovement.getTheBoard())){
             int [] emptySpot = this.generateTiles.findEmptyPosition();
