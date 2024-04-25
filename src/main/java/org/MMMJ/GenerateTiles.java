@@ -47,7 +47,7 @@ public class GenerateTiles {
     }
 
     /**
-     * finds a random new position on the board that is empty
+     * Finds a random new position on the board that is empty
      *
      * @return a list [row, col] of the row,column pair
      */
@@ -86,7 +86,6 @@ public class GenerateTiles {
         board.addTile(0,1,new Tile(4));
         board.addTile(1,0,new Tile(2));
 //        board.addTile(1,1,new Tile(4));
-        Combining combining = new Combining(board.getTileAt(0,0), board.getTileAt(0,1));
 
 
         board.printBoard();

@@ -68,13 +68,10 @@ public class Board {
         }
     }
 
-
-
-
-
-
+    /** Getter method of getting the size of the board*/
     public int getSize(){return this.size;}
 
+    /** Getter method of getting the current tile on the board at the wanted row and column*/
     public Tile getTileAt(int row, int col){return this.board[row][col];}
 
     /**
@@ -94,7 +91,7 @@ public class Board {
     }
 
     /**
-     *  replaces a tile of the of an occupied position
+     * Replaces a tile of the of an occupied position
      *
      * @param row the row of the new tile
      * @param col the col of the new tile
@@ -125,6 +122,11 @@ public class Board {
         }
     }
 
+    /**
+     * Checks to see if there is currently an empty space still on the board to
+     * determine if the board is full or not
+     * @return true if the board is full. Otherwise, returns false
+     */
     public boolean isBoardFull() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -135,7 +137,6 @@ public class Board {
         }
         return true;
     }
-
 
     public static void main(String[] args) throws TileOccupiedException, OutOfBoardException {
         Board test = new Board(5);
@@ -150,42 +151,4 @@ public class Board {
 
 
     }
-
-    public boolean checkCollision(Tile tile ,String key){
-        switch (key){
-            case "w":
-                if(board[tile.getXPos()][tile.getYPos()-1].getCurrNum() != 0){
-                    return true;
-                }
-            case "s":
-                if(board[tile.getXPos()][tile.getYPos()+1].getCurrNum() != 0){
-                    return true;
-                }
-            case "a":
-                if(board[tile.getXPos()-1][tile.getYPos()].getCurrNum() != 0){
-                    return true;
-                }
-            case "d":
-                if(board[tile.getXPos()+1][tile.getYPos()].getCurrNum() != 0){
-                    return true;
-                }
-            default:
-                return false;
-        }
-    }
-
-    public void moveTile(String move, Tile[][] array){
-        switch(move){
-            case "s":
-                for (int row = 0; row < array.length; row++) {
-                    for (int col = 0; col < array[row].length; col++) {
-                            array[row+1][col] = array[row][col];
-                    }
-                }
-            default:
-                break;
-        }
-    }
-
-
 }

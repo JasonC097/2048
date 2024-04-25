@@ -27,13 +27,13 @@ import java.util.Arrays;
 public class GameManager {
     /** The board of the game*/
     private Board board;
-
+    /** The size of the board (can be customizable or defaulted to 4)*/
     private int board_size; // Can change later for making custom board sizes
-
+    /** The number to end the game at (can be customizable or defaulted to 2048)*/
     private int gameEndNumber; // Change to 2048 for actual game, smaller number for testing only
-
+    /** Movement instance of the game to do movements*/
     private Movement movement; // Sounds clunky, change later to maybe something abstract or interface
-
+    /** Generate Tiles instance to generate tiles for the board*/
     private GenerateTiles generateTiles;
 
     /**
@@ -74,8 +74,7 @@ public class GameManager {
      * @return boolean true if player has reached the desired number. Otherwise, return false
      */
     public boolean didPlayerWin() {
-        // Block 2 is the new number to replace the combined numbers
-        // Grab the value of the new number to see if it is the desired number to end the game
+        // Iterate through the board to find the winning number
         for (Tile [] row : this.board.getBoard()){
             for (Tile tile : row){
                 if (tile.getCurrNum() == this.gameEndNumber){

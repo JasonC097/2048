@@ -25,8 +25,6 @@ public class Movement {
     
     private Board theBoard;
 
-    private Combining combining;
-
     public Movement(Board board){
         this.theBoard= board;
     }
