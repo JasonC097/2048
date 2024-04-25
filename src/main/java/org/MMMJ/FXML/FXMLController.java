@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -65,11 +66,6 @@ public class FXMLController {
     @FXML
     private Button btnRight;
 
-    /**An instance of the {@link ObservableArray2D} class that is used to create the values
-     * in the board **/
-    private ObservableArray2D<Tile> array2D = new ObservableArray2D<Tile>(theBoard.getBoard());
-
-//    ObservableList<ObservableList<Tile>> array2D =
     /**An instance of the {@link Movement} class**/
     private Movement movement = new Movement(theBoard);
 
@@ -79,18 +75,23 @@ public class FXMLController {
         assert btnNewGame != null : "fx:id=\"btnNewGame\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert labelScore != null : "fx:id=\"labelScore\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
-        theBoard.initBoard();
-        theBoard.addTile(3,3,new Tile(2));
-        array2D.set(theBoard.getBoard());
-        updateLabelInGridPane(array2D.get());
+        theBoard.addTile(1,1,new Tile(4));
+        theBoard.printBoard();
         initBindings();
         initEventHandlers();
+        updateLabelInGridPane(theBoard.getBoard());
     }
 
     public void initBindings(){
         System.out.println("initBindings");
-        array2D.arrayProperty().addListener((observableValue, tiles, t1) ->
-                updateLabelInGridPane(t1));
+        for (int row = 0; row < theBoard.getBoard().size(); row++) {
+            theBoard.getBoard().get(row).addListener(new ListChangeListener<Tile>() {
+                @Override
+                public void onChanged(Change<? extends Tile> change) {
+                    updateLabelInGridPane(theBoard.getBoard());
+                }
+            });
+        }
 
     }
 
@@ -98,12 +99,14 @@ public class FXMLController {
      * A helper method used to set the text of the label to the value in the array given
      * @param array - an array of tile objects
      */
-    private void updateLabelInGridPane(Tile[][] array){
-        System.out.println("Update the grid pane");
-        for (int row = 0; row < array.length; row++){
-            for (int col = 0; col < array[row].length; col++){
+    private void updateLabelInGridPane(ObservableList<ObservableList<Tile>> array){
+//        System.out.println("Update the grid pane");
+        for (int row = 0; row < array.size(); row++){
+            for (int col = 0; col < array.get(row).size(); col++){
                 Label label = (Label) tileGrid.lookup("#label" +row + col);
-                label.setText(String.valueOf(array[row][col].getCurrNum()));
+//                System.out.println((array.get(row).get(col).getCurrNum()));
+                label.setText(String.valueOf(array.get(row).get(col).getCurrNum()));
+
             }
         }
     }
@@ -139,7 +142,8 @@ public class FXMLController {
     private void changeBoard(String direction) {
         try {
             movement.moveTile(direction);
-            array2D.set(theBoard.getBoard());
+            theBoard.printBoard();
+//            theBoard.set(theBoard.getBoard());
             //updateLabelInGridPane(array2D.get());
         } catch (TileOccupiedException e) {
             throw new RuntimeException(e);

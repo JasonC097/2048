@@ -15,6 +15,8 @@
  * **************************************** */
 package org.MMMJ;
 
+import javafx.collections.ObservableList;
+
 import java.util.Scanner;
 
 public class Movement {
@@ -88,7 +90,7 @@ public class Movement {
     public void moveTile(String userInput) throws TileOccupiedException, OutOfBoardException {
         switch(userInput){
             case "w":
-                for(Tile[] row : theBoard.getBoard()){
+                for(ObservableList<Tile> row : theBoard.getBoard()){
                     for(Tile tile : row) {
                         if (tile.getCurrNum() != 0){
                             while (checkCollision(tile, "w")) {
@@ -117,7 +119,7 @@ public class Movement {
                 }
                 break;
             case "a":
-                for(Tile[] row : theBoard.getBoard()) {
+                for(ObservableList<Tile> row : theBoard.getBoard()) {
                     for (Tile tile : row) {
                         if(tile.getCurrNum() != 0) {
                             while (checkCollision(tile, "a")) {

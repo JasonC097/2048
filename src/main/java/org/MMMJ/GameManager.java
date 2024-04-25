@@ -18,6 +18,8 @@
  */
 package org.MMMJ;
 
+import javafx.collections.ObservableList;
+
 import java.util.Arrays;
 
 /**
@@ -70,7 +72,7 @@ public class GameManager {
     public boolean didPlayerWin() {
         // Block 2 is the new number to replace the combined numbers
         // Grab the value of the new number to see if it is the desired number to end the game
-        for (Tile [] row : this.board.getBoard()){
+        for (ObservableList<Tile> row : this.board.getBoard()){
             for (Tile tile : row){
                 if (tile.getCurrNum() == this.gameEndNumber){
                     System.out.println("You win!");
