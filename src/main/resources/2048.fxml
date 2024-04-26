@@ -163,9 +163,9 @@
       </Label>
       <Label fx:id="labelScore" layoutX="393.0" layoutY="14.0" style="-fx-background-color: Burlywood;" text="Score:" textFill="WHITE" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="14.0" />
       <Label layoutX="121.0" layoutY="46.0" text="Join the tiles, get to 2048!" textFill="#909090" />
-      <Button fx:id="btnUp" layoutX="45.0" layoutY="122.0" mnemonicParsing="false" text="Up" textFill="#fffefe" />
-      <Button fx:id="btnDown" layoutX="45.0" layoutY="166.0" mnemonicParsing="false" text="Down" textFill="#fffefe" />
-      <Button fx:id="btnLeft" layoutX="45.0" layoutY="218.0" mnemonicParsing="false" text="Left" textFill="#fffefe" />
-      <Button fx:id="btnRight" layoutX="45.0" layoutY="264.0" mnemonicParsing="false" text="Right" textFill="#fffefe" />
+      <Button fx:id="btnUp" layoutX="67.0" layoutY="109.0" mnemonicParsing="false" style="-fx-background-color: burlywood;" text="Up" textFill="#fffefe" AnchorPane.leftAnchor="67.0" AnchorPane.topAnchor="109.0" />
+      <Button fx:id="btnDown" layoutX="59.0" layoutY="144.0" mnemonicParsing="false" style="-fx-background-color: burlywood;" text="Down" textFill="#fffefe" AnchorPane.leftAnchor="59.0" AnchorPane.topAnchor="144.0" />
+      <Button fx:id="btnLeft" layoutX="64.0" layoutY="180.0" mnemonicParsing="false" style="-fx-background-color: burlywood;" text="Left" textFill="#fffefe" AnchorPane.leftAnchor="64.0" AnchorPane.topAnchor="180.0" />
+      <Button fx:id="btnRight" layoutX="60.0" layoutY="216.0" mnemonicParsing="false" style="-fx-background-color: burlywood;" text="Right" textFill="#fffefe" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="216.0" />
    </children>
 </AnchorPane>

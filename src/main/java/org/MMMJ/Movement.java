@@ -15,22 +15,16 @@
  * **************************************** */
 package org.MMMJ;
 
+import javafx.collections.ObservableList;
+
 import java.util.Scanner;
 
 public class Movement {
-    /**
-     * Scanner object
-     */
-    private Scanner scnr;
-    
     private Board theBoard;
-
-    private Combining combining;
 
     public Movement(Board board){
         this.theBoard= board;
     }
-
 
     /**
      * Constructor for the movement class
@@ -86,12 +80,17 @@ public class Movement {
         return false;
     }
 
+    /**
+     * Uses a switch statement to see which direction the user wants to
+     * move the tiles on the board
+     * @param userInput - direction the user wants to move
+     * @throws TileOccupiedException
+     * @throws OutOfBoardException
+     */
     public void moveTile(String userInput) throws TileOccupiedException, OutOfBoardException {
-//        scnr = new Scanner(System.in);
-
         switch(userInput){
             case "w":
-                for(Tile[] row : theBoard.getBoard()){
+                for(ObservableList<Tile> row : theBoard.getBoard()){
                     for(Tile tile : row) {
                         if (tile.getCurrNum() != 0){
                             while (checkCollision(tile, "w")) {
@@ -120,7 +119,7 @@ public class Movement {
                 }
                 break;
             case "a":
-                for(Tile[] row : theBoard.getBoard()) {
+                for(ObservableList<Tile> row : theBoard.getBoard()) {
                     for (Tile tile : row) {
                         if(tile.getCurrNum() != 0) {
                             while (checkCollision(tile, "a")) {
