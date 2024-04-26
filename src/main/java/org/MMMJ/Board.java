@@ -38,6 +38,9 @@ public class Board {
 
     /**
      * Constructor for the Board class
+     * @see <https://stackoverflow.com/questions/16317949/javafx-two-dimensional-observablelist>
+     *     helped us understand how to initialize a 2D observable list of tiles in order
+     *     to have a change listener that can bind in the {@link org.MMMJ.FXML.FXMLController} class
      * @param boardSize - size of length of the rows and columns of the board
      */
     public Board(int boardSize){

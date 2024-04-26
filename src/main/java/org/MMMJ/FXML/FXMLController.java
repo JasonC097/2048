@@ -19,18 +19,12 @@
 package org.MMMJ.FXML;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
-
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import org.MMMJ.*;
 
@@ -76,14 +70,17 @@ public class FXMLController {
         assert labelScore != null : "fx:id=\"labelScore\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         theBoard.addTile(1,1,new Tile(4));
-        theBoard.printBoard();
         initBindings();
         initEventHandlers();
         updateLabelInGridPane(theBoard.getBoard());
     }
 
+    /**
+     * sets up a binding between the board and the labels in tileGrid
+     * used information from @see </https://stackoverflow.com/questions/26838183/how-to-monitor-changes-on-objects-contained-in-an-observablelist-javafx>
+     * to correctly bind 2D Observable list of tiles with the labels in the grid pane
+     */
     public void initBindings(){
-        System.out.println("initBindings");
         for (int row = 0; row < theBoard.getBoard().size(); row++) {
             theBoard.getBoard().get(row).addListener(new ListChangeListener<Tile>() {
                 @Override
@@ -100,11 +97,9 @@ public class FXMLController {
      * @param array - an array of tile objects
      */
     private void updateLabelInGridPane(ObservableList<ObservableList<Tile>> array){
-//        System.out.println("Update the grid pane");
         for (int row = 0; row < array.size(); row++){
             for (int col = 0; col < array.get(row).size(); col++){
                 Label label = (Label) tileGrid.lookup("#label" +row + col);
-//                System.out.println((array.get(row).get(col).getCurrNum()));
                 label.setText(String.valueOf(array.get(row).get(col).getCurrNum()));
 
             }
@@ -128,10 +123,10 @@ public class FXMLController {
             changeBoard("d");
         });
 
-//        btnNewGame.setOnAction(actionEvent -> {
-//            theBoard.initBoard();
-//            array2D.set(theBoard.getBoard());
-//        });
+        btnNewGame.setOnAction(actionEvent -> {
+            theBoard = new Board(4);
+            System.out.println("pressed");
+        });
     }
 
     /**
@@ -143,8 +138,6 @@ public class FXMLController {
         try {
             movement.moveTile(direction);
             theBoard.printBoard();
-//            theBoard.set(theBoard.getBoard());
-            //updateLabelInGridPane(array2D.get());
         } catch (TileOccupiedException e) {
             throw new RuntimeException(e);
         } catch (OutOfBoardException e) {
