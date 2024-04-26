@@ -17,7 +17,7 @@ public class FXMLMain extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public  void start(Stage primaryStage) throws IOException {
         //Load the FXML file
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/2048.fxml"));
