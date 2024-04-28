@@ -38,9 +38,11 @@ import org.MMMJ.*;
 import javax.swing.*;
 
 
-public class FXMLController {
+public class FXMLController{
 
-    private Board theBoard = new Board(4);
+    public static Board theBoard = new Board(4);
+
+    private GameManager manager = new GameManager(theBoard, movement, 16);
 
     @FXML
     private ResourceBundle resources;
@@ -73,7 +75,7 @@ public class FXMLController {
     private Label labelTitle1;
 
     /**An instance of the {@link Movement} class**/
-    private Movement movement = new Movement(theBoard);
+    public static  Movement movement = new Movement(theBoard);
 
 
     @FXML
@@ -81,10 +83,13 @@ public class FXMLController {
         assert btnNewGame != null : "fx:id=\"btnNewGame\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert labelScore != null : "fx:id=\"labelScore\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
-        theBoard.addTile(1,1,new Tile(4));
         initBindings();
+        theBoard.addTile(1,1,new Tile(4));
+//        theBoard.printBoard();
+
         initEventHandlers();
-        updateLabelInGridPane(theBoard.getBoard());
+//        tileGrid.requestFocus();
+//        updateLabelInGridPane(theBoard.getBoard());
     }
 
     /**
@@ -93,11 +98,29 @@ public class FXMLController {
      * to correctly bind 2D Observable list of tiles with the labels in the grid pane
      */
     public void initBindings(){
+        System.out.println("initBindings");
         for (int row = 0; row < theBoard.getBoard().size(); row++) {
             theBoard.getBoard().get(row).addListener(new ListChangeListener<Tile>() {
                 @Override
                 public void onChanged(Change<? extends Tile> change) {
+
                     updateLabelInGridPane(theBoard.getBoard());
+                    System.out.println("Running on changed");
+                    manager.getBoard().printBoard();
+//                    if(manager.didPlayerWin()){
+//
+//                    }
+                    manager.didPlayerWin();
+//                    try {
+//                        manager.didPlayerLose();
+//                    } catch (TileOccupiedException e) {
+//                        throw new RuntimeException(e);
+//                    } catch (OutOfBoardException e) {
+//                        throw new RuntimeException(e);
+//                    } catch (BoardIsFullException e) {
+//                        throw new RuntimeException(e);
+//                    }
+
                 }
             });
         }
@@ -109,9 +132,11 @@ public class FXMLController {
      * @param array - an array of tile objects
      */
     private void updateLabelInGridPane(ObservableList<ObservableList<Tile>> array){
+//        System.out.println("Update the grid pane");
         for (int row = 0; row < array.size(); row++){
             for (int col = 0; col < array.get(row).size(); col++){
                 Label label = (Label) tileGrid.lookup("#label" +row + col);
+//                System.out.println((array.get(row).get(col).getCurrNum()));
                 label.setText(String.valueOf(array.get(row).get(col).getCurrNum()));
                 if(label.getText() == "0"){
                     label.setVisible(false);
@@ -121,21 +146,32 @@ public class FXMLController {
         }
     }
 
+
+
     /**
      * A method used to update the board when specific ques are given
      */
     public void initEventHandlers(){
+
+
         btnUp.setOnAction(keyEvent -> {
             changeBoard("w");
+            keyEvent.consume();
         });
         btnDown.setOnAction(keyEvent -> {
             changeBoard("s");
+            keyEvent.consume();
+
         });
         btnLeft.setOnAction(keyEvent -> {
             changeBoard("a");
+            keyEvent.consume();
+
         });
         btnRight.setOnAction(keyEvent -> {
             changeBoard("d");
+            keyEvent.consume();
+
         });
 
         btnNewGame.setOnAction(actionEvent -> {
@@ -150,13 +186,15 @@ public class FXMLController {
      * move the tiles and finally update the array
      * @param direction - direction the user wants the tiles to move
      */
-    private void changeBoard(String direction) {
+    public void changeBoard(String direction) {
         try {
             movement.moveTile(direction);
-            theBoard.printBoard();
-        } catch (TileOccupiedException e) {
+//            theBoard.printBoard();
+//            theBoard.set(theBoard.getBoard());
+            //updateLabelInGridPane(array2D.get());
+        } catch (TileOccupiedException | BoardIsFullException e) {
             throw new RuntimeException(e);
-        } catch (OutOfBoardException e) {
+        } catch (OutOfBoardException  e) {
             throw new RuntimeException(e);
         }
     }

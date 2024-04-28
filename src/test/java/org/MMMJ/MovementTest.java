@@ -23,7 +23,7 @@ class MovementTest {
 
 
     @Test
-    void moveTileUp() throws TileOccupiedException, OutOfBoardException {
+    void moveTileUp() throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         myMovement.moveTile("w");
         assertEquals(myMovement.getTheBoard().getTileAt(0,1).getCurrNum(),2);
         assertEquals(myMovement.getTheBoard().getTileAt(1,1).getCurrNum(), 4);
@@ -31,7 +31,7 @@ class MovementTest {
 
     }
     @Test
-    void moveTileDown() throws TileOccupiedException, OutOfBoardException {
+    void moveTileDown() throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         myMovement.moveTile("s");
         assertEquals(myMovement.getTheBoard().getTileAt(4,1).getCurrNum(),2);
         assertEquals(myMovement.getTheBoard().getTileAt(5,1).getCurrNum(), 4);
@@ -39,14 +39,14 @@ class MovementTest {
 
     }
     @Test
-    void moveTileRight() throws TileOccupiedException, OutOfBoardException {
+    void moveTileRight() throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         myMovement.moveTile("d");
         assertEquals(myMovement.getTheBoard().getTileAt(2,5).getCurrNum(),2);
         assertEquals(myMovement.getTheBoard().getTileAt(3,4).getCurrNum(), 4);
         assertEquals(myMovement.getTheBoard().getTileAt(3,5).getCurrNum(), 8);
     }
     @Test
-    void moveTileLeft() throws TileOccupiedException, OutOfBoardException {
+    void moveTileLeft() throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         myMovement.moveTile("a");
         assertEquals(myMovement.getTheBoard().getTileAt(2,0).getCurrNum(),2);
         assertEquals(myMovement.getTheBoard().getTileAt(3,0).getCurrNum(), 4);
@@ -54,7 +54,7 @@ class MovementTest {
     }
 
     @Test
-    void combine() throws TileOccupiedException, OutOfBoardException {
+    void combine() throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         // Add some tiles for combining upwards
         // Replace the tile 2 with 4 to see if combining happens when moving upwards
         this.myMovement.getTheBoard().replaceTile(2, 1, new Tile(4));

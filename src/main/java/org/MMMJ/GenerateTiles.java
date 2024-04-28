@@ -17,11 +17,9 @@ package org.MMMJ;
 
 import java.util.Random;
 
-class BoardIsFullException extends Exception{
-    public BoardIsFullException(String msg){
-        super(msg);
-    }
-}
+//public class BoardIsFullException extends Exception{
+//
+//}
 
 public class GenerateTiles {
     /** A random number**/
@@ -44,8 +42,8 @@ public class GenerateTiles {
      * @return the tile object with the new number
      */
     public Tile generateNewTile(){
-        int ratio = random.nextInt(2);
-        if(ratio == 1){
+        int ratio = random.nextInt(100);
+        if(ratio <= 75){
             return new Tile(2);
         }else{
             return new Tile(4);
@@ -53,7 +51,8 @@ public class GenerateTiles {
     }
 
     /**
-     * finds a random new position on the board that is empty
+     * Finds a random new position on the board that is empty
+     *
      * @return a list [row, col] of the row,column pair
      */
     public int[] findEmptyPosition() throws BoardIsFullException {
@@ -87,7 +86,8 @@ public class GenerateTiles {
         board.addTile(0,1,new Tile(4));
         board.addTile(1,0,new Tile(2));
 //        board.addTile(1,1,new Tile(4));
-        Combining combining = new Combining(board.getTileAt(0,0), board.getTileAt(0,1));
+
+
         board.printBoard();
         int[] emptyPos = generateTiles.findEmptyPosition();
         for (int pos: emptyPos){
