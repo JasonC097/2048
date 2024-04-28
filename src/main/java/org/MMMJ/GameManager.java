@@ -65,6 +65,19 @@ public class GameManager {
         this.movement = new Movement(this.board);
         this.generateTiles = new GenerateTiles(this.board);
     }
+
+    /**
+     * Constructor for initializing with own board and movement as well as the game winning number
+     *
+     * @param theBoard - the board being used
+     * @param theMovement - the movement being used
+     * @param userDesiredEndNum - integer of the user's desired end number
+     */
+    public GameManager(Board theBoard, Movement theMovement, int userDesiredEndNum){
+        this.board = theBoard;
+        this.movement = theMovement;
+        this.gameEndNumber = userDesiredEndNum;
+    }
     /** Getter method for accessing the board for unit testing*/
     public Board getBoard() {return board;}
 
