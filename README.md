@@ -38,7 +38,10 @@ Like the original game, when the player reaches 2048, a popup occurs saying that
 player loses (no more movements possible), a popup also occurs telling the player that they have lost the 2048 game. 
 After exiting the popup, the player can start a new game to play again.
 
-The GameManager class checks when the player wins or loses. The 
+The GameManager class checks when the player wins or loses. While the movement class handles the combination logic and 
+the movement of the tiles, it also helps determine when to generate new tiles. The responsibility lies to the movement
+class because they would be able to tell when changes to the board occur when movement happens. Generating new tiles 
+creates a new tile object that are what is inside the 2-D observable list. 
 
 ## Package Structure
 The package structure used has the JavaFXML in a separate package from the logic of the game. The necessary logic for 
@@ -50,8 +53,5 @@ The JUnit tests for the classes are in a separate package from the actual classe
 - JavaFX Scene Builder Version 21.0.0 https://gluonhq.com/
 - JUnit Version 5.8.2 https://junit.org/junit5/
 
-## How to run it
-*IMPORTANT - Update this with information about how to build and run your
-project!
 ## Demo
 Here is a video demo of the game: 
