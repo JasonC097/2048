@@ -32,7 +32,10 @@ import org.MMMJ.*;
 
 public class FXMLController{
 
-    public static Board theBoard = new Board(4);
+    public  Board theBoard = new Board(4);
+
+    /**An instance of the {@link Movement} class**/
+    public   Movement movement = new Movement(theBoard);
 
     private GameManager manager = new GameManager(theBoard, movement, 16);
 
@@ -66,10 +69,8 @@ public class FXMLController{
     @FXML
     private Label labelTitle1;
 
-    GameManager gm = new GameManager();
+    private boolean gameOver;
 
-    /**An instance of the {@link Movement} class**/
-    public static  Movement movement = new Movement(theBoard);
 
 
     @FXML
@@ -79,10 +80,9 @@ public class FXMLController{
         assert tileGrid != null : "fx:id=\"tileGrid\" was not injected: check your FXML file 'FinalFXML.fxml'.";
         initBindings();
         theBoard.addTile(1,1,new Tile(4));
-//        theBoard.printBoard();
 
         initEventHandlers();
-//        tileGrid.requestFocus();
+//        tileGrid.requestFocus()
 //        updateLabelInGridPane(theBoard.getBoard());
     }
 
@@ -91,8 +91,12 @@ public class FXMLController{
      * used information from @see </https://stackoverflow.com/questions/26838183/how-to-monitor-changes-on-objects-contained-in-an-observablelist-javafx>
      * to correctly bind 2D Observable list of tiles with the labels in the grid pane
      */
-    public void initBindings(){
+    public void initBindings() throws TileOccupiedException, OutOfBoardException {
         System.out.println("initBindings");
+
+//        theBoard.getBoard().addListener(observable -> {
+//
+//        });
         for (int row = 0; row < theBoard.getBoard().size(); row++) {
             theBoard.getBoard().get(row).addListener(new ListChangeListener<Tile>() {
                 @Override
@@ -101,10 +105,9 @@ public class FXMLController{
                     updateLabelInGridPane(theBoard.getBoard());
                     System.out.println("Running on changed");
                     manager.getBoard().printBoard();
-//                    if(manager.didPlayerWin()){
-//
-//                    }
-                    manager.didPlayerWin();
+
+//                    manager.didPlayerWin();
+//                    manager.didPlayerWin();
 //                    try {
 //                        manager.didPlayerLose();
 //                    } catch (TileOccupiedException e) {
@@ -146,25 +149,89 @@ public class FXMLController{
      * A method used to update the board when specific ques are given
      */
     public void initEventHandlers(){
+        gameOver = false;
 
 
         btnUp.setOnAction(keyEvent -> {
             changeBoard("w");
             keyEvent.consume();
+            if(manager.didPlayerWin() && !gameOver){
+                winnerPopup();
+                gameOver = true;
+            }
+            try {
+                if(manager.didPlayerLose()){
+                    loserPopup();
+                }
+            } catch (TileOccupiedException e) {
+                throw new RuntimeException(e);
+            } catch (OutOfBoardException e) {
+                throw new RuntimeException(e);
+            } catch (BoardIsFullException e) {
+                throw new RuntimeException(e);
+            }
+
         });
         btnDown.setOnAction(keyEvent -> {
             changeBoard("s");
             keyEvent.consume();
+            if(manager.didPlayerWin() && !gameOver){
+                winnerPopup();
+                gameOver = true;
+            }
+            try {
+                if(manager.didPlayerLose() ){
+                    loserPopup();
+                }
+            } catch (TileOccupiedException e) {
+                throw new RuntimeException(e);
+            } catch (OutOfBoardException e) {
+                throw new RuntimeException(e);
+            } catch (BoardIsFullException e) {
+                throw new RuntimeException(e);
+            }
 
         });
         btnLeft.setOnAction(keyEvent -> {
             changeBoard("a");
             keyEvent.consume();
+            if(manager.didPlayerWin() && !gameOver){
+                winnerPopup();
+                gameOver = true;
+            }
+            try {
+                if(manager.didPlayerLose() ){
+                    loserPopup();
+                }
+            } catch (TileOccupiedException e) {
+                throw new RuntimeException(e);
+            } catch (OutOfBoardException e) {
+                throw new RuntimeException(e);
+            } catch (BoardIsFullException e) {
+                throw new RuntimeException(e);
+            }
+
 
         });
         btnRight.setOnAction(keyEvent -> {
             changeBoard("d");
             keyEvent.consume();
+            if(manager.didPlayerWin() && !gameOver){
+                winnerPopup();
+                gameOver = true;
+            }
+            try {
+                if(manager.didPlayerLose()){
+                    loserPopup();
+                }
+            } catch (TileOccupiedException e) {
+                throw new RuntimeException(e);
+            } catch (OutOfBoardException e) {
+                throw new RuntimeException(e);
+            } catch (BoardIsFullException e) {
+                throw new RuntimeException(e);
+            }
+
 
         });
 
