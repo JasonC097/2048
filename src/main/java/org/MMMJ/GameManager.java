@@ -77,6 +77,7 @@ public class GameManager {
      */
     public GameManager(Board theBoard, Movement theMovement, int userDesiredEndNum){
         this.board = theBoard;
+        this.board_size = theBoard.getSize();
         this.movement = theMovement;
         this.gameEndNumber = userDesiredEndNum;
     }
