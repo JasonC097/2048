@@ -30,7 +30,7 @@ class GameManagerTest {
     }
 
     @Test
-    void didPlayerWin () throws TileOccupiedException, OutOfBoardException {
+    void didPlayerWin () throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         // Make sure the game isn't automatically in win condition
         assertFalse(this.game.didPlayerWin());
         this.game.getBoard().addTile(0, 1, new Tile(16));
@@ -40,7 +40,7 @@ class GameManagerTest {
     }
 
     @Test
-    void didPlayerLose() throws TileOccupiedException, OutOfBoardException {
+    void didPlayerLose() throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         // Make sure player isn't automatically in lose condition
         assertFalse(this.game.didPlayerLose());
         this.game.getBoard().addTile(0, 1, new Tile(6));
@@ -104,7 +104,7 @@ class GameManagerTest {
     }
 
     @Test
-    void makeCopyOfBoard () throws OutOfBoardException, TileOccupiedException {
+    void makeCopyOfBoard () throws OutOfBoardException, TileOccupiedException, BoardIsFullException {
         // Make an exact replica of the current board
         Board copyBoard = this.game.makeCopyOfBoard();
         assertTrue(this.game.areBoardsSame(copyBoard));

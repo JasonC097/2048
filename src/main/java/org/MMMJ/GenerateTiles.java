@@ -17,11 +17,9 @@ package org.MMMJ;
 
 import java.util.Random;
 
-class BoardIsFullException extends Exception{
-    public BoardIsFullException(String msg){
-        super(msg);
-    }
-}
+//public class BoardIsFullException extends Exception{
+//
+//}
 
 public class GenerateTiles {
     /** A random number**/

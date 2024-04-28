@@ -19,6 +19,8 @@
 package org.MMMJ;
 
 import javafx.collections.ObservableList;
+import org.MMMJ.FXML.FXMLController;
+import org.MMMJ.FXML.FXMLMain;
 
 import java.util.Arrays;
 
@@ -28,13 +30,13 @@ import java.util.Arrays;
  */
 public class GameManager {
     /** The board of the game*/
-    private Board board;
+    private static Board board;
     /** The size of the board (can be customizable or defaulted to 4)*/
     private int board_size; // Can change later for making custom board sizes
     /** The number to end the game at (can be customizable or defaulted to 2048)*/
     private int gameEndNumber; // Change to 2048 for actual game, smaller number for testing only
     /** Movement instance of the game to do movements*/
-    private Movement movement; // Sounds clunky, change later to maybe something abstract or interface
+    private static Movement movement; // Sounds clunky, change later to maybe something abstract or interface
     /** Generate Tiles instance to generate tiles for the board*/
     private GenerateTiles generateTiles;
 
@@ -105,7 +107,7 @@ public class GameManager {
      * Player lose is defined as no more possible movements can be made
      * @return boolean true if player can not make more moves. Otherwise, return false if possible moves can still be made
      */
-    public boolean didPlayerLose() throws TileOccupiedException, OutOfBoardException {
+    public boolean didPlayerLose() throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         // Create copy of board and movement to not interfere with user's current board
         // Used for predicting possible movements
         Board tempBoard = makeCopyOfBoard();
@@ -159,6 +161,15 @@ public class GameManager {
         return tempBoard;
     }
 
+    public void startGame() throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
+        while(!this.didPlayerLose() && !this.didPlayerWin()){
+            System.out.println("Go in a direction");
+            Tile newTile = generateTiles.generateNewTile();
+            int[] emptyPos = generateTiles.findEmptyPosition();
+
+        }
+    }
+
     /**
      * Used to get the score of the game by summing up the numbers on the board
      * @return the sum of the numbers on the board
@@ -193,5 +204,11 @@ public class GameManager {
             // Index 1 refers to the column of the empty tile location
             this.board.addTile(emptySpot[0], emptySpot[1], this.generateTiles.generateNewTile());
         }
+    }
+
+    public static void main(String[] args) throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
+
+
+
     }
 }

@@ -15,15 +15,8 @@
  * **************************************** */
 package org.MMMJ;
 
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 public class Board {
     /**
@@ -51,7 +44,7 @@ public class Board {
      * Setter method to help with cloning the board
      * @param board the Tile[][] object to be wrapped as a board object
      */
-    public void setBoard(ObservableList<ObservableList<Tile>> board) { this.board = board;}
+    public void updateBoard(ObservableList<ObservableList<Tile>> board) { this.board = board;}
 
     /**
      * @return gets the 2D representation of the board
@@ -113,10 +106,29 @@ public class Board {
      */
     public void addTile(int row, int col, Tile tile) throws OutOfBoardException, TileOccupiedException {
         testTile(row, col);
-
         this.board.get(row).set(col, tile);
         tile.setXPos(row);
         tile.setYPos(col);
+    }
+
+    public boolean equals(Board compareBoard){
+        // In case the boards are of different size for whatever reason
+        if (compareBoard.getSize() != this.size){
+            return false;
+        }
+        // Otherwise, iterate through each row and column coordinate pair to see if tiles are different
+        for (int row = 0; row < this.size; row++){
+            for (int column = 0; column < this.size; column++){
+                Tile originalTile1 = this.getTileAt(row, column);
+                Tile tempBoardTile = compareBoard.getTileAt(row, column);
+                if (!originalTile1.equals(tempBoardTile)){
+                    return false;
+                }
+            }
+        }
+        // If no difference present, then boards are the same
+        return true;
+
     }
 
 

@@ -22,8 +22,11 @@ import java.util.Scanner;
 public class Movement {
     private Board theBoard;
 
+    private GenerateTiles genTile;
+
     public Movement(Board board){
         this.theBoard= board;
+        genTile = new GenerateTiles(this.theBoard);
     }
 
     /**
@@ -87,9 +90,10 @@ public class Movement {
      * @throws TileOccupiedException
      * @throws OutOfBoardException
      */
-    public void moveTile(String userInput) throws TileOccupiedException, OutOfBoardException {
+    public void moveTile(String userInput) throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
         switch(userInput){
             case "w":
+                Board localBoard = this.makeCopyOfBoard();
                 for(ObservableList<Tile> row : theBoard.getBoard()){
                     for(Tile tile : row) {
                         if (tile.getCurrNum() != 0){
@@ -99,11 +103,21 @@ public class Movement {
                                 theBoard.addTile(oldXPos - 1, oldYPos, tile);
                                 theBoard.replaceTile(oldXPos, oldYPos, new Tile());
                             }
+
+
                         }
+
                     }
                 }
+                if(!this.theBoard.equals(localBoard)){
+                    int[] emptyPos = genTile.findEmptyPosition();
+                    theBoard.addTile(emptyPos[0], emptyPos[1], genTile.generateNewTile());
+                }
+                theBoard.printBoard();
+
                 break;
             case "s":
+                localBoard = this.makeCopyOfBoard();
                 for(int i = theBoard.getSize() -1;  i >= 0; i--) {
                     for (int j = theBoard.getSize() -1; j >= 0; j--) {
                         Tile tile = theBoard.getTileAt(i,j);
@@ -117,8 +131,15 @@ public class Movement {
                         }
                     }
                 }
+                if(!this.theBoard.equals(localBoard)){
+                    int[] emptyPos = genTile.findEmptyPosition();
+                    theBoard.addTile(emptyPos[0], emptyPos[1], genTile.generateNewTile());
+                }
+                theBoard.printBoard();
+
                 break;
             case "a":
+                localBoard = this.makeCopyOfBoard();
                 for(ObservableList<Tile> row : theBoard.getBoard()) {
                     for (Tile tile : row) {
                         if(tile.getCurrNum() != 0) {
@@ -131,8 +152,16 @@ public class Movement {
                         }
                     }
                 }
+                if(!this.theBoard.equals(localBoard)){
+                    int[] emptyPos = genTile.findEmptyPosition();
+                    theBoard.addTile(emptyPos[0], emptyPos[1], genTile.generateNewTile());
+                }
+                theBoard.printBoard();
+
                 break;
             case "d":
+                localBoard = this.makeCopyOfBoard();
+
                 for(int i = theBoard.getSize() -1;  i >= 0; i--) {
                     for (int j = theBoard.getSize() -1; j >= 0; j--) {
                         Tile tile = theBoard.getTileAt(i,j);
@@ -146,6 +175,11 @@ public class Movement {
                         }
                     }
                 }
+                if(!this.theBoard.equals(localBoard)){
+                    int[] emptyPos = genTile.findEmptyPosition();
+                    theBoard.addTile(emptyPos[0], emptyPos[1], genTile.generateNewTile());
+                }
+                theBoard.printBoard();
                 break;
         }
     }
@@ -192,6 +226,17 @@ public class Movement {
 
 
 
+    }
+
+    public Board makeCopyOfBoard() throws OutOfBoardException {
+        Board tempBoard = new Board(this.theBoard.getSize());
+        for (int row = 0; row < this.theBoard.getSize(); row++){
+            for (int column = 0; column < this.theBoard.getSize(); column++){
+                int tileValue = this.theBoard.getTileAt(row, column).getCurrNum();
+                tempBoard.replaceTile(row, column, new Tile(tileValue));
+            }
+        }
+        return tempBoard;
     }
 
 }
