@@ -68,7 +68,7 @@ public class Tile {
     }
 
     /**
-     * @return the tile objects current number
+     * Getter and Setter methods to get and set the properties of the tile's position and value
      */
     public int getCurrNum() {
         return currNum;
