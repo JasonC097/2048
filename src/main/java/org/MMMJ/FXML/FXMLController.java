@@ -18,15 +18,24 @@
  */
 package org.MMMJ.FXML;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import org.MMMJ.*;
+import javax.swing.*;
 
 
 public class FXMLController {
@@ -59,6 +68,9 @@ public class FXMLController {
 
     @FXML
     private Button btnRight;
+
+    @FXML
+    private Label labelTitle1;
 
     /**An instance of the {@link Movement} class**/
     private Movement movement = new Movement(theBoard);
@@ -101,6 +113,9 @@ public class FXMLController {
             for (int col = 0; col < array.get(row).size(); col++){
                 Label label = (Label) tileGrid.lookup("#label" +row + col);
                 label.setText(String.valueOf(array.get(row).get(col).getCurrNum()));
+                if(label.getText() == "0"){
+                    label.setVisible(false);
+                }
 
             }
         }
@@ -124,8 +139,9 @@ public class FXMLController {
         });
 
         btnNewGame.setOnAction(actionEvent -> {
-            theBoard = new Board(4);
-            System.out.println("pressed");
+            theBoard.setBoard(new Board(4).getBoard());
+            updateLabelInGridPane(theBoard.getBoard());
+            labelScore.setText("0");
         });
     }
 
@@ -143,5 +159,22 @@ public class FXMLController {
         } catch (OutOfBoardException e) {
             throw new RuntimeException(e);
         }
+    }
+    public void loserPopup(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("You Lose!");
+        alert.setHeaderText("");
+        alert.setContentText("You did not reach 2048"+"\n"+"Press new game to play again!");
+        alert.setGraphic(labelTitle1);
+        alert.showAndWait();
+    }
+
+    public void winnerPopup(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("You Won!");
+        alert.setHeaderText("");
+        alert.setContentText("You reached 2048!"+"\n"+"You may continue playing or start a new game");
+        alert.setGraphic(labelTitle1);
+        alert.showAndWait();
     }
 }
