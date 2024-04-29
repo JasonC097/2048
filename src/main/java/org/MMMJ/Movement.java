@@ -110,11 +110,8 @@ public class Movement {
                     }
                 }
                 if(!this.theBoard.equals(localBoard)){
-                    int[] emptyPos = genTile.findEmptyPosition();
-                    theBoard.addTile(emptyPos[0], emptyPos[1], genTile.generateNewTile());
+                    placeGenTile();
                 }
-                theBoard.printBoard();
-
                 break;
             case "s":
                 localBoard = this.makeCopyOfBoard();
@@ -132,10 +129,8 @@ public class Movement {
                     }
                 }
                 if(!this.theBoard.equals(localBoard)){
-                    int[] emptyPos = genTile.findEmptyPosition();
-                    theBoard.addTile(emptyPos[0], emptyPos[1], genTile.generateNewTile());
+                    placeGenTile();
                 }
-                theBoard.printBoard();
 
                 break;
             case "a":
@@ -153,10 +148,8 @@ public class Movement {
                     }
                 }
                 if(!this.theBoard.equals(localBoard)){
-                    int[] emptyPos = genTile.findEmptyPosition();
-                    theBoard.addTile(emptyPos[0], emptyPos[1], genTile.generateNewTile());
+                    placeGenTile();
                 }
-                theBoard.printBoard();
 
                 break;
             case "d":
@@ -176,13 +169,17 @@ public class Movement {
                     }
                 }
                 if(!this.theBoard.equals(localBoard)){
-                    int[] emptyPos = genTile.findEmptyPosition();
-                    theBoard.addTile(emptyPos[0], emptyPos[1], genTile.generateNewTile());
+                    placeGenTile();
                 }
-                theBoard.printBoard();
                 break;
         }
     }
+
+    public  void placeGenTile() throws BoardIsFullException, OutOfBoardException, TileOccupiedException {
+        int[] emptyPos = genTile.findEmptyPosition();
+        theBoard.addTile(emptyPos[0], emptyPos[1], genTile.generateNewTile());
+    }
+
 
     /**
      * Combining method to determine if combining can happen, and if so, updating the board when necessary
@@ -203,31 +200,10 @@ public class Movement {
     /** Getter method that returns the board*/
     public Board getTheBoard(){return theBoard;}
 
-    public static void main(String[] args) throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
-        Scanner scnr = new Scanner(System.in); // Scanner used for testing with key inputs
-        Board testBoard = new Board(4);
-        testBoard.addTile(2,2,new Tile(4));
-        testBoard.addTile(2,1,new Tile(2));
-        testBoard.addTile(1,2,new Tile(4));
-        testBoard.addTile(1,1,new Tile(2));
-        Movement movement = new Movement(testBoard);
-        GenerateTiles generateTiles = new GenerateTiles(movement.theBoard);
-        movement.theBoard.printBoard();
-        for (int i = 0; i < 100 ; i++) {
-            System.out.println("Enter direction you want to head in:");
-            String userInput = scnr.nextLine(); // Create an invalid user input handler
-            movement.moveTile(userInput);
-            generateTiles.generateNewTile();
-            int[] emptyPos = generateTiles.findEmptyPosition();
-            movement.theBoard.addTile(emptyPos[0],emptyPos[1], generateTiles.generateNewTile());
-            movement.theBoard.printBoard();
-        }
-
-
-
-
-    }
-
+    /**
+     * @return a copy of the board currently set up
+     * @throws OutOfBoardException if the tile trying to be replaced outside the board limits
+     */
     public Board makeCopyOfBoard() throws OutOfBoardException {
         Board tempBoard = new Board(this.theBoard.getSize());
         for (int row = 0; row < this.theBoard.getSize(); row++){
@@ -238,5 +214,14 @@ public class Movement {
         }
         return tempBoard;
     }
+
+    public static void main(String[] args) throws TileOccupiedException, OutOfBoardException, BoardIsFullException {
+        Scanner scnr = new Scanner(System.in); // Scanner used for testing with key inputs
+        Board testBoard = new Board(4);
+
+
+    }
+
+
 
 }

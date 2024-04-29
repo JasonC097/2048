@@ -15,6 +15,9 @@
  * **************************************** */
 package org.MMMJ;
 
+/**
+ * Exception class that gets thrown when trying to add a tile to an already full board
+ */
 public class BoardIsFullException extends Exception{
     public BoardIsFullException(String msg){
         super(msg);

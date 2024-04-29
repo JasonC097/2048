@@ -18,6 +18,9 @@
  */
 package org.MMMJ;
 
+/**
+ * Exception class that gets thrown when a tile tries to get added outside the board
+ */
 public class OutOfBoardException extends Exception{
     public OutOfBoardException(String msg){
         super(msg);
