@@ -205,8 +205,6 @@ public class Board {
         System.out.println(test.getTileAt(3,3).getXPos());
         System.out.println(test.getTileAt(3,3).getYPos());
 
-
-//        System.out.println(test.getValueAt(3,3));
         test.printBoard();
 
 

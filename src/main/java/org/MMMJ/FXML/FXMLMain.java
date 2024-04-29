@@ -4,16 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import org.MMMJ.Board;
-import org.MMMJ.GameManager;
-import org.MMMJ.Movement;
-import org.MMMJ.Tile;
-
 import java.io.IOException;
-import java.security.Key;
-import java.util.Scanner;
 
 public class FXMLMain extends Application {
     /** An instance of the {@link FXMLController} class**/
