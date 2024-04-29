@@ -89,7 +89,9 @@ public class FXMLController{
         gameOver = false;
         initBindings();
         movement.placeGenTile();
+
     }
+
 
     /**
      * sets up a binding between the board and the labels in tileGrid
@@ -97,7 +99,6 @@ public class FXMLController{
      * to correctly bind 2D Observable list of tiles with the labels in the grid pane
      */
     public void initBindings(){
-        System.out.println("initBindings");
 
         for (int row = 0; row < theBoard.getBoard().size(); row++) {
             theBoard.getBoard().get(row).addListener(new ListChangeListener<Tile>() {
