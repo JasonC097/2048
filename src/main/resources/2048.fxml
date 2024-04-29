@@ -12,7 +12,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: floralwhite;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.MMMJ.FXML.FXMLController">
    <children>
       <Button fx:id="btnNewGame" layoutX="393.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: burlywood;" text="New Game" textFill="#fffefe" AnchorPane.rightAnchor="129.0" AnchorPane.topAnchor="37.0" />
-      <GridPane fx:id="tileGrid" alignment="CENTER" gridLinesVisible="true" layoutX="121.0" layoutY="71.0" style="-fx-background-color: burlywood;" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="71.0">
+      <GridPane fx:id="tileGrid" alignment="CENTER" gridLinesVisible="true" layoutX="121.0" layoutY="71.0" prefHeight="258.0" prefWidth="358.0" style="-fx-background-color: burlywood;" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="71.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -172,6 +172,6 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <Label fx:id="lblScore" alignment="CENTER" layoutX="431.0" layoutY="15.0" prefHeight="17.0" prefWidth="46.0" AnchorPane.bottomAnchor="368.0" AnchorPane.leftAnchor="431.0" />
+      <Label fx:id="lblScore" alignment="CENTER" layoutX="428.0" layoutY="15.0" prefHeight="17.0" prefWidth="46.0" style="-fx-background-color: burlywood;" textFill="WHITE" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="15.0" />
    </children>
 </AnchorPane>
