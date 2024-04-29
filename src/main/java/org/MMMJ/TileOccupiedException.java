@@ -18,6 +18,9 @@
  */
 package org.MMMJ;
 
+/**
+ *  Exception class that gets throw when trying to add a tile to an occupied space
+ */
 public class TileOccupiedException extends  Exception{
     public TileOccupiedException(String msg){
         super(msg);

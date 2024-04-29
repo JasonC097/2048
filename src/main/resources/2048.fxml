@@ -161,7 +161,7 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <Label fx:id="labelScore" layoutX="393.0" layoutY="14.0" style="-fx-background-color: Burlywood;" text="Score:" textFill="WHITE" AnchorPane.leftAnchor="393.0" AnchorPane.topAnchor="14.0" />
+      <Label fx:id="labelScore" layoutX="393.0" layoutY="15.0" style="-fx-background-color: Burlywood;" text="Score:" textFill="WHITE" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="15.0" />
       <Label layoutX="121.0" layoutY="46.0" text="Join the tiles, get to 2048!" textFill="#909090" />
       <Button fx:id="btnUp" layoutX="67.0" layoutY="109.0" mnemonicParsing="false" style="-fx-background-color: burlywood;" text="Up" textFill="#fffefe" AnchorPane.leftAnchor="67.0" AnchorPane.topAnchor="109.0" />
       <Button fx:id="btnDown" layoutX="59.0" layoutY="144.0" mnemonicParsing="false" style="-fx-background-color: burlywood;" text="Down" textFill="#fffefe" AnchorPane.leftAnchor="59.0" AnchorPane.topAnchor="144.0" />
@@ -172,5 +172,6 @@
             <Font size="37.0" />
          </font>
       </Label>
+      <Label fx:id="lblScore" alignment="CENTER" layoutX="431.0" layoutY="15.0" prefHeight="17.0" prefWidth="46.0" AnchorPane.bottomAnchor="368.0" AnchorPane.leftAnchor="431.0" />
    </children>
 </AnchorPane>

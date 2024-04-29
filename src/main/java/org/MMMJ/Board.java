@@ -113,7 +113,12 @@ public class Board {
         tile.setXPos(row);
         tile.setYPos(col);
     }
-
+    /**
+     * method to determine whether the boards are equivalent to each other
+     *
+     * @param compareBoard - the instance being compared to
+     * @return boolean true if the boards are the same. Otherwise, returns false
+     */
     public boolean equals(Board compareBoard){
         // In case the boards are of different size for whatever reason
         if (compareBoard.getSize() != this.size){
@@ -132,6 +137,15 @@ public class Board {
         // If no difference present, then boards are the same
         return true;
 
+    }
+
+    /**
+     * Sets the current instance with a new board
+     *
+     * @param newBoard the instantiation  of the new board
+     */
+    public void setBoard(ObservableList newBoard){
+        this.board = newBoard;
     }
 
 
