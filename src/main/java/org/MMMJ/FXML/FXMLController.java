@@ -19,6 +19,7 @@
 package org.MMMJ.FXML;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -33,6 +34,9 @@ import org.MMMJ.*;
 public class FXMLController{
 
     public static Board theBoard = new Board(4);
+
+    /**An instance of the {@link Movement} class**/
+    public static Movement movement = new Movement(theBoard);
 
     private GameManager manager = new GameManager(theBoard, movement, 16);
 
@@ -66,12 +70,6 @@ public class FXMLController{
     @FXML
     private Label labelTitle1;
 
-    GameManager gm = new GameManager();
-
-    /**An instance of the {@link Movement} class**/
-    public static  Movement movement = new Movement(theBoard);
-
-
     @FXML
     void initialize() throws TileOccupiedException, OutOfBoardException {
         assert btnNewGame != null : "fx:id=\"btnNewGame\" was not injected: check your FXML file 'FinalFXML.fxml'.";
@@ -97,28 +95,12 @@ public class FXMLController{
             theBoard.getBoard().get(row).addListener(new ListChangeListener<Tile>() {
                 @Override
                 public void onChanged(Change<? extends Tile> change) {
-
                     updateLabelInGridPane(theBoard.getBoard());
                     System.out.println("Running on changed");
                     manager.getBoard().printBoard();
-//                    if(manager.didPlayerWin()){
-//
-//                    }
-                    manager.didPlayerWin();
-//                    try {
-//                        manager.didPlayerLose();
-//                    } catch (TileOccupiedException e) {
-//                        throw new RuntimeException(e);
-//                    } catch (OutOfBoardException e) {
-//                        throw new RuntimeException(e);
-//                    } catch (BoardIsFullException e) {
-//                        throw new RuntimeException(e);
-//                    }
-
                 }
             });
         }
-
     }
 
     /**
@@ -132,9 +114,9 @@ public class FXMLController{
                 Label label = (Label) tileGrid.lookup("#label" +row + col);
 //                System.out.println((array.get(row).get(col).getCurrNum()));
                 label.setText(String.valueOf(array.get(row).get(col).getCurrNum()));
-                if(label.getText() == "0"){
-                    label.setVisible(false);
-                }
+//                if(Objects.equals(label.getText(), "0")){
+//                    label.setVisible(false);
+//                }
 
             }
         }
@@ -146,8 +128,6 @@ public class FXMLController{
      * A method used to update the board when specific ques are given
      */
     public void initEventHandlers(){
-
-
         btnUp.setOnAction(keyEvent -> {
             changeBoard("w");
             keyEvent.consume();
@@ -165,14 +145,11 @@ public class FXMLController{
         btnRight.setOnAction(keyEvent -> {
             changeBoard("d");
             keyEvent.consume();
-
         });
 
-//        btnNewGame.setOnAction(actionEvent -> {
-//            theBoard.setBoard(new Board(4).getBoard());
-//            updateLabelInGridPane(theBoard.getBoard());
-//            labelScore.setText("0");
-//        });
+        btnNewGame.setOnAction(actionEvent -> {
+            labelScore.setText("0");
+        });
     }
 
     /**
