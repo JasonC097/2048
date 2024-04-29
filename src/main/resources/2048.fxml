@@ -6,14 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: floralwhite;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.MMMJ.FXML.FXMLController">
    <children>
       <Button fx:id="btnNewGame" layoutX="393.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: burlywood;" text="New Game" textFill="#fffefe" AnchorPane.rightAnchor="129.0" AnchorPane.topAnchor="37.0" />
-      <GridPane fx:id="tileGrid" alignment="CENTER" gridLinesVisible="true" layoutX="121.0" layoutY="71.0" style="-fx-background-color: burlywood;" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="71.0">
+      <GridPane fx:id="tileGrid" alignment="CENTER" gridLinesVisible="true" layoutX="121.0" layoutY="71.0" prefHeight="258.0" prefWidth="358.0" style="-fx-background-color: burlywood;" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="71.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -29,7 +28,7 @@
          <children>
             <Label fx:id="label00" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.halignment="CENTER">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -37,7 +36,7 @@
             </Label>
             <Label fx:id="label01" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -45,7 +44,7 @@
             </Label>
             <Label fx:id="label02" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -53,7 +52,7 @@
             </Label>
             <Label fx:id="label03" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="3" GridPane.halignment="CENTER">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -61,7 +60,7 @@
             </Label>
             <Label fx:id="label10" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -69,7 +68,7 @@
             </Label>
             <Label fx:id="label11" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -77,7 +76,7 @@
             </Label>
             <Label fx:id="label12" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -85,7 +84,7 @@
             </Label>
             <Label fx:id="label13" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -93,7 +92,7 @@
             </Label>
             <Label fx:id="label20" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -101,7 +100,7 @@
             </Label>
             <Label fx:id="label21" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -109,7 +108,7 @@
             </Label>
             <Label fx:id="label22" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -117,15 +116,15 @@
             </Label>
             <Label fx:id="label23" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
                </effect>
             </Label>
-            <Label fx:id="label30" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="51.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <Label fx:id="label30" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -133,7 +132,7 @@
             </Label>
             <Label fx:id="label31" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -141,7 +140,7 @@
             </Label>
             <Label fx:id="label32" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -149,7 +148,7 @@
             </Label>
             <Label fx:id="label33" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -173,7 +172,6 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <Label fx:id="lblScore" alignment="CENTER" layoutX="431.0" layoutY="15.0" prefHeight="17.0" prefWidth="46.0" AnchorPane.bottomAnchor="368.0" AnchorPane.leftAnchor="431.0" />
-      <HBox layoutX="-103.0" layoutY="-171.0" />
+      <Label fx:id="lblScore" alignment="CENTER" layoutX="428.0" layoutY="15.0" prefHeight="17.0" prefWidth="46.0" style="-fx-background-color: burlywood;" textFill="WHITE" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="15.0" />
    </children>
 </AnchorPane>
