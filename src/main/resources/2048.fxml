@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -122,7 +123,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label fx:id="label30" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="50.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <Label fx:id="label30" alignment="CENTER" contentDisplay="CENTER" opacity="0.96" prefHeight="51.0" prefWidth="71.0" style="-fx-background-color: floralwhite;" text="0" textFill="#909090" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <font>
                   <Font size="36.0" />
                </font>
@@ -173,5 +174,6 @@
          </font>
       </Label>
       <Label fx:id="lblScore" alignment="CENTER" layoutX="431.0" layoutY="15.0" prefHeight="17.0" prefWidth="46.0" AnchorPane.bottomAnchor="368.0" AnchorPane.leftAnchor="431.0" />
+      <HBox layoutX="-103.0" layoutY="-171.0" />
    </children>
 </AnchorPane>
