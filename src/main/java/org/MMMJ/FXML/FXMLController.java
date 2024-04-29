@@ -191,6 +191,11 @@ public class FXMLController{
         });
     }
 
+    /**
+     * A method that checks if the player wins or loses
+     * if they have reached 2048 once and decide to continue playing the winner
+     * pop up will not appear again
+     */
     private void checkWinLoss() {
         if(manager.didPlayerWin() && !gameOver){
             winnerPopup();
@@ -218,6 +223,10 @@ public class FXMLController{
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * An alert that appears when the player isn't able to move any more tiles
+     */
     public void loserPopup(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("You Lose!");
@@ -227,6 +236,9 @@ public class FXMLController{
         alert.showAndWait();
     }
 
+    /**
+     * An alert that pops up when the player reaches the 2048 tile
+     */
     public void winnerPopup(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("You Won!");

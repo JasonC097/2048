@@ -17,10 +17,6 @@ package org.MMMJ;
 
 import java.util.Random;
 
-//public class BoardIsFullException extends Exception{
-//
-//}
-
 public class GenerateTiles {
     /** A random number**/
     private Random random;
@@ -85,7 +81,6 @@ public class GenerateTiles {
         board.addTile(0,0,new Tile(4));
         board.addTile(0,1,new Tile(4));
         board.addTile(1,0,new Tile(2));
-//        board.addTile(1,1,new Tile(4));
 
 
         board.printBoard();
