@@ -19,10 +19,6 @@
 package org.MMMJ;
 
 import javafx.collections.ObservableList;
-import org.MMMJ.FXML.FXMLController;
-import org.MMMJ.FXML.FXMLMain;
-
-import java.util.Arrays;
 
 /**
  * @author Jason Chung
@@ -140,7 +136,7 @@ public class GameManager {
      * Used to get the score of the game by summing up the numbers on the board
      * @return the sum of the numbers on the board
      */
-    public int getScore(){
+    public int calculateScore(){
         int score = 0;
         for (int row = 0; row < this.board.getSize(); row++){
             for (int column = 0; column < this.board.getSize(); column++){

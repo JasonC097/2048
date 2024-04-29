@@ -18,9 +18,7 @@
  */
 package org.MMMJ.FXML;
 
-import java.awt.event.KeyEvent;
 import java.net.URL;
-import java.security.Key;
 import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -133,7 +131,7 @@ public class FXMLController{
                 } else {
                     label.setVisible(false);
                 }
-                this.score = manager.getScore();
+                this.score = manager.calculateScore();
                 lblScore.setText(String.valueOf(this.score));
 
             }
