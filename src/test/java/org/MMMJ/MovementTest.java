@@ -91,6 +91,6 @@ class MovementTest {
         // 2 Should combine while everything else remains the same
         assertEquals(this.myMovement.getTheBoard().getTileAt(2,5).getCurrNum(), 4);
         assertEquals(this.myMovement.getTheBoard().getTileAt(3,4).getCurrNum(), 4);
-        assertEquals(this.myMovement.getTheBoard().getTileAt(3,5).getCurrNum(), 4);
+        assertEquals(this.myMovement.getTheBoard().getTileAt(3,5).getCurrNum(), 8);
     }
 }
