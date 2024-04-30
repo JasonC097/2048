@@ -18,6 +18,44 @@ class BoardTest {
     }
 
     /**
+     * Test the equals function which should iterate through the list making sure the tiles have equals numbers
+     *
+     * @throws TileOccupiedException If the tile position is already occupied.
+     * @throws OutOfBoardException   If the tile position is out of the board boundaries.
+     */
+    @Test
+    void equals() throws TileOccupiedException, OutOfBoardException {
+        Board testBoard1 = new Board(5);
+        Board testBoard2 = new Board(4);
+        // different sizes should automatically fail
+        assertFalse(theBoard.equals(testBoard2));
+
+        // one has an items the other does not
+        testBoard1.addTile(1,1,new Tile(4));
+        assertFalse(theBoard.equals(testBoard1));
+
+        theBoard.addTile(1,1,new Tile(4));
+        assertTrue(theBoard.equals(testBoard1));
+    }
+
+    /**
+     * Tests the is full function testing with a non full board then full board
+     *
+     * @throws TileOccupiedException If the tile position is already occupied.
+     * @throws OutOfBoardException   If the tile position is out of the board boundaries.
+     */
+    @Test
+    void isFull() throws TileOccupiedException, OutOfBoardException {
+        Board board = new Board(2);
+        assertFalse(board.isBoardFull());
+        board.addTile(0,0, new Tile(8));
+        board.addTile(0,1, new Tile(9));
+        board.addTile(1,0, new Tile(10));
+        board.addTile(1,1, new Tile(11));
+        assertTrue(board.isBoardFull());
+    }
+
+    /**
      * Verifies each tile is initialized  with the right metadata
      */
     @Test
@@ -74,6 +112,11 @@ class BoardTest {
         assertThrows(TileOccupiedException.class,() -> theBoard.addTile(4,4, new Tile(4)));
         // should be able to replace the tile
         assertDoesNotThrow(() -> theBoard.replaceTile(4,4, new Tile(2)));
+
+    }
+
+    @Test
+    void isBoardFull(){
 
     }
 
