@@ -111,10 +111,6 @@ public class FXMLController{
 
     }
 
-    /**
-     * Sets the scene of the controller
-     * @param scene the main scene used in main
-     */
     public void setScene(Scene scene){
         this.mainScene = scene;
     }
