@@ -46,7 +46,7 @@ dependencies {
 
 application {
     mainModule = "csci205_final_project"
-    mainClassName = "org.MMMJ.FXML.FXMLMain"
+    mainClassName = "org.MMMJ.Main"
 
     if (project.hasProperty("mainClass")) {
         getMainClass().set(project.getProperty("mainClass"))
