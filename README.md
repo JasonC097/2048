@@ -13,11 +13,11 @@ List team members:
 
 Mateo Herrera (Scrum Master)- 2026 Computer Science Bachelor of Science
 
-Mike Merola (Developer) - 2026 Computer Science and Engineering
+Mike Merola (Developer)- 2026 Computer Science and Engineering
 
 Jason Chung (Developer )- 2026 Computer Science Bachelor of Science
 
-Miguel Romero (Product Owner) - 2026 Computer Science and Engineering
+Miguel Romero (Product Owner)- 2026 Computer Science and Engineering
 
 
 ## Project Information
@@ -54,4 +54,4 @@ The JUnit tests for the classes are in a separate package from the actual classe
 - JUnit Version 5.8.2 https://junit.org/junit5/
 
 ## Demo
-Here is a video demo of the game: 
+Here is a video demo of the game: https://mediaspace.bucknell.edu/media/t/1_rrc4c6at
